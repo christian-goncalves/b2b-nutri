@@ -1,0 +1,104 @@
+/* B2B Nutris Design System v1.2 | Atualização cromática da home
+   Base: v1.1.1. Mantidos tipografia, espaçamento, raios e componentes. */
+:root {
+  /* 1) Cores OFICIAIS da marca: HEX não alterados */
+  --color-brand-primary: #641D24;   /* vinho profundo */
+  --color-brand-cream: #FAF3EA;     /* marfim / creme */
+  --color-brand-pink: #EABAB7;      /* rosa queimado */
+  --color-brand-coral: #EF7053;     /* coral */
+  --color-brand-olive: #82845A;     /* verde oliva */
+
+  /* 2) Cor de apoio APROVADA: exclusivamente CTA principal */
+  --color-action-primary: #F2C14E;
+  --color-action-hover: #E8B53E;
+  --color-action-active: #D9A52E;
+  --color-action-text: var(--color-brand-primary);
+
+  /* 3) Superfícies e gradiente aprovados por seção */
+  --color-background-page: #F4F4F5;      /* zinco: base neutra */
+  --color-background-hero: var(--color-brand-cream);
+  --color-background-about: var(--color-brand-primary);
+  --color-surface: #FFFFFF;             /* cards e formulário */
+  --color-surface-alt: var(--color-brand-cream);
+  --color-surface-soft: #F8F1F0;
+  --color-gradient-start: var(--color-brand-cream);
+  --color-gradient-end: #F0D2D0;       /* variação clara do rosa */
+  --gradient-catalog: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+
+  /* 4) Leitura, bordas, estados e elementos decorativos */
+  --color-text: #302629;
+  --color-text-muted: #665659;
+  --color-text-on-dark: #FFFFFF;
+  --color-text-on-dark-muted: #F1DADD;
+  --color-border: #E4E4E7;
+  --color-border-warm: #DFD0CB;
+  --color-border-hover: #B49C98;
+  --color-decorative-quote: #F0F0F2;
+  --color-table-hover: #FDF8F5;
+  --color-table-note: #FBF7F2;
+  --color-success: #246D48;
+  --color-warning: #8A5200;
+  --color-error: #A12828;
+  --color-disabled-bg: #EAE3DF;
+  --color-disabled-text: #756C69;
+  --color-placeholder: #756A68;
+  --color-focus: var(--color-brand-primary);
+  --color-ring-error: rgba(161,40,40,.16);
+
+  /* 5) Compatibilidade com v1.0/v1.1.1 */
+  --color-primary: var(--color-brand-primary);
+  --color-background: var(--color-background-page);
+  --color-brand-soft: var(--color-brand-pink);
+  --color-accent: var(--color-brand-coral);
+  --color-complement: var(--color-brand-olive);
+  --color-highlight: var(--color-brand-pink);
+  --color-secondary: var(--color-brand-olive);
+  --color-auxiliary: var(--color-brand-coral);
+  --color-on-primary: #FFFFFF;
+  --color-primary-hover: #50171D;
+  --color-primary-active: #421318;
+  --color-secondary-hover: #DFA5A3;
+  --color-accent-text: #8C3A26;
+  --color-complement-text: #45492B;
+
+  /* Famílias aprovadas */
+  --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+
+  /* Escala tipográfica aprovada */
+  --text-h1: 2.25rem;   /* 36px */
+  --text-h2: 1.875rem;  /* 30px */
+  --text-h3: 1.5rem;    /* 24px */
+  --text-h4: 1.25rem;   /* 20px */
+  --text-h5: 1.125rem;  /* 18px */
+  --text-h6: 1rem;      /* 16px */
+  --text-body: 1rem;    /* 16px */
+  --text-small: 0.875rem; /* 14px */
+  --text-caption: 0.75rem; /* 12px */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Escala de espaçamento aprovada */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Raios aprovados */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Tokens de componentes */
+  --control-sm: 32px;
+  --control-md: 40px;
+  --control-lg: 48px;
+  --shadow-card-hover: 0 10px 24px rgba(48, 38, 41, 0.09);
+  --focus-ring: 0 0 0 3px rgba(100, 29, 36, 0.22);
+  --transition-fast: 150ms ease;
+}
