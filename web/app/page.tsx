@@ -3,6 +3,7 @@ import { BookCard } from "@/components/book-card";
 import { HomeHeroSlider } from "@/components/home-hero-slider";
 import { SectionHeading } from "@/components/section-heading";
 import { featuredHomeBooks, homeBooks, sliderBooks } from "@/data/home-books";
+import { homeTestimonials } from "@/data/home-testimonials";
 
 export default function HomePage() {
   return (
@@ -94,9 +95,26 @@ export default function HomePage() {
       <section className="home-section section--testimonials" aria-labelledby="testimonials-title">
         <div className="site-container">
           <SectionHeading id="testimonials-title" eyebrow="Depoimentos" title="O que dizem nossos leitores?" centered />
-          <p className="empty-state testimonial-empty">
-            Depoimentos serão publicados quando houver relatos reais autorizados.
-          </p>
+          <div className="testimonial-grid">
+            {homeTestimonials.map((testimonial) => (
+              <article className="testimonial-card" key={testimonial.id}>
+                <span className="testimonial-card__demo-label">Exemplo ilustrativo</span>
+                <div className="testimonial-card__meta">
+                  <div className="testimonial-card__avatar" aria-label="Espaço reservado para imagem" role="img">
+                    <span aria-hidden="true" />
+                  </div>
+                  <div className="testimonial-card__identity">
+                    <h3 className="testimonial-card__name">{testimonial.name}</h3>
+                    <p className="testimonial-card__role">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="testimonial-card__text">“{testimonial.quote}”</p>
+                <div className="testimonial-card__stars" aria-label="Avaliação ilustrativa: cinco estrelas">
+                  <span aria-hidden="true">★★★★★</span>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

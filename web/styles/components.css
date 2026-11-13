@@ -163,14 +163,85 @@ body { background: var(--color-background-page); }
 /* 05. Book catalog gradient */
 .section--catalog { background: var(--gradient-catalog); }
 
-/* 06. Testimonials white, white cards, subtle book / quote graphics */
-.section--testimonials { background:var(--color-surface); position:relative; overflow:hidden; }
-.section--testimonials::before { content:'“'; font-family:Georgia,serif; position:absolute; right:7%; top:7%; line-height:1; font-size:clamp(200px,30vw,490px); color:var(--color-decorative-quote); pointer-events:none; }
-.testimonial-grid { position:relative; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-6); }
-.testimonial-card { background:var(--color-surface); box-shadow:0 8px 35px rgba(48,38,41,.075); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:clamp(20px,3vw,30px); display:flex; flex-direction:column; gap:var(--space-3); }
-.testimonial-card__name { color:var(--color-primary); font-weight:700; }
-.testimonial-card__text { color:var(--color-text-muted); }
-.testimonial-card__stars { color:var(--color-brand-coral); letter-spacing:.13em; }
+/* 06. Depoimentos: fundos adaptados da referência e conteúdo de demonstração identificado. */
+.section--testimonials {
+  position: relative;
+  overflow: hidden;
+  padding-block: 120px;
+  background-color: var(--color-surface-alt);
+  background-image: url("/images/testimonials/section-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.section--testimonials::before { content: none; }
+.section--testimonials > .site-container { width: min(100% - 30px, 1170px); }
+.section--testimonials .section-heading__eyebrow { color: var(--color-brand-primary-soft); }
+.testimonial-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+.testimonial-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  min-height: 308px;
+  padding: 30px 40px 35px;
+  border-radius: 10px;
+  background-color: var(--color-surface);
+  background-image: url("/images/testimonials/card-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.testimonial-card__demo-label {
+  color: var(--color-brand-primary);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  letter-spacing: .12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.testimonial-card__meta { display: flex; width: 100%; align-items: center; gap: 20px; }
+.testimonial-card__avatar {
+  position: relative;
+  display: grid;
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-brand-pink) 40%, white);
+}
+.testimonial-card__avatar::before {
+  position: absolute;
+  top: 14px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--color-brand-primary-soft);
+  content: "";
+}
+.testimonial-card__avatar::after {
+  position: absolute;
+  bottom: -5px;
+  width: 42px;
+  height: 34px;
+  border-radius: 50% 50% 0 0;
+  background: var(--color-brand-primary-soft);
+  content: "";
+}
+.testimonial-card__identity { min-width: 0; }
+.testimonial-card__name { color: var(--color-brand-primary); font-size: 20px; font-weight: var(--weight-bold); line-height: 1.3; }
+.testimonial-card__role { margin-top: 4px; color: var(--color-brand-primary-soft); font-size: 11px; font-weight: var(--weight-semibold); line-height: 1.4; }
+.testimonial-card__text { color: var(--color-text-muted); font-size: 16px; line-height: 1.75; }
+.testimonial-card__stars { margin-top: auto; color: var(--color-brand-coral); font-size: 20px; letter-spacing: .13em; line-height: 1; }
 
 /* 07. Contact zinc + white form */
 .contact-layout { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(24px,5vw,70px); align-items:start; }
@@ -192,6 +263,7 @@ body { background: var(--color-background-page); }
 /* Breakpoints APROVADOS: <=980: 2 livros; <500: 1 livro; <=720: autora em coluna */
 @media (max-width:980px) {
   .book-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .section--testimonials { padding-block: 80px; }
   .newsletter-panel__inner { grid-template-columns:1fr; }
   .newsletter-form { grid-template-columns:1fr 1fr; }
   .newsletter-form .btn { width:100%; }
@@ -211,11 +283,20 @@ body { background: var(--color-background-page); }
   .testimonial-grid { grid-template-columns:1fr; }
   .site-footer__inner { grid-template-columns:1fr 1fr; }
 }
+@media (min-width:1280px) {
+  .testimonial-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (max-width:767px) {
+  .testimonial-grid { grid-template-columns:1fr; margin-top:40px; }
+  .testimonial-card { padding-inline:30px; }
+}
 @media (max-width:499px) {
   .book-grid { grid-template-columns:1fr; }
   .site-footer__inner { grid-template-columns:1fr; }
   .upcoming-visual { min-height:250px; }
   .home-section { padding-block:46px; }
+  .section--testimonials { padding-block:60px; }
+  .testimonial-card { padding:25px 20px 30px; }
   .hero-cover-wrap { min-height:220px; }
   .mock-cover { max-width:195px; }
 }

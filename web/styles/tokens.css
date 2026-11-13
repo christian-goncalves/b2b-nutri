@@ -3,6 +3,7 @@
 :root {
   /* 1) Cores da marca e creme de fundo aprovado para o sistema */
   --color-brand-primary: #641D24;   /* vinho profundo */
+  --color-brand-primary-soft: #98565C; /* variante para pequenos títulos / eyebrows */
   --color-brand-cream: #FDF9F5;     /* creme de fundo do sistema */
   --color-brand-pink: #EABAB7;      /* rosa queimado */
   --color-brand-coral: #EF7053;     /* coral */
