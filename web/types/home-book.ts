@@ -4,8 +4,10 @@ export type HomeBook = {
   id: string;
   slug: string;
   title: string;
+  heroTitle?: string;
   category: string;
   description: string;
+  heroDescription?: string;
   longDescription: string;
   cover: StaticImageData;
   coverAlt: string;

@@ -3,6 +3,7 @@
 :root {
   /* 1) Cores OFICIAIS da marca: HEX não alterados */
   --color-brand-primary: #641D24;   /* vinho profundo */
+  --color-brand-primary-soft: #98565C; /* variante para pequenos títulos / eyebrows */
   --color-brand-cream: #FAF3EA;     /* marfim / creme */
   --color-brand-pink: #EABAB7;      /* rosa queimado */
   --color-brand-coral: #EF7053;     /* coral */
