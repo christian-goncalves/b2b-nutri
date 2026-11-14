@@ -276,12 +276,12 @@ summary:focus-visible {
 
 .hero-copy__panel--outgoing,
 .home-hero__cover-layer--outgoing {
-  animation: home-hero-fade-out 500ms ease both;
+  animation: home-hero-fade-out 1000ms ease both;
 }
 
 .hero-copy__panel--incoming,
 .home-hero__cover-layer--incoming {
-  animation: home-hero-fade-in 500ms ease both;
+  animation: home-hero-fade-in 1000ms ease both;
 }
 
 .home-hero__cover {

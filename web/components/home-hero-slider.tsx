@@ -52,7 +52,7 @@ export function HomeHeroSlider({ books }: HomeHeroSliderProps) {
     transitionTimerRef.current = window.setTimeout(() => {
       setOutgoingIndex(null);
       transitionTimerRef.current = null;
-    }, 500);
+    }, 1000);
   }, [slides.length]);
 
   useEffect(() => {
