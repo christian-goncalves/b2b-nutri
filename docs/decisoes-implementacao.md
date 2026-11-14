@@ -6,6 +6,10 @@
 
 Este registro complementa [roteiro.md](roteiro.md). Onde uma decisão abaixo divergir do roteiro, vale a decisão explícita mais recente do responsável pelo projeto. Este documento registra requisitos; não significa que as funcionalidades já foram implementadas ou que integrações foram validadas em produção.
 
+## Decisão posterior sobre as amostras (2026-11-14)
+
+O responsável aprovou visualmente as seis amostras de cinco páginas e dispensou a revisão de tags e ordem de leitura dos PDFs para sua disponibilização. O leitor deve permitir a leitura visual e a navegação pelas páginas. Esta decisão substitui a exigência de revisão de tags descrita abaixo; os demais requisitos de conteúdo e autorização permanecem aplicáveis.
+
 ## Decisões confirmadas
 
 ### Newsletter

@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import type { Metadata } from "next";
-import { SamplePdfPreview } from "@/components/sample-pdf-preview";
 import { BookCard } from "@/components/book-card";
 import { ebooks } from "@/data/home-books";
+import { getAuthorizedSamplePath } from "@/lib/sample-pdf";
 import type { HomeBook } from "@/types/home-book";
 
 export const dynamicParams = false;
@@ -43,15 +41,6 @@ function getRelatedBooks(ebook: HomeBook) {
     .map((slug) => bySlug.get(slug))
     .filter((item): item is HomeBook => Boolean(item) && item?.slug !== ebook.slug)
     .slice(0, 3);
-}
-
-function getAuthorizedSamplePath(ebook: HomeBook) {
-  const sample = ebook.samplePdf;
-  if (!sample?.authorized || !/^\/samples\/[\w./-]+\.pdf$/i.test(sample.path) || sample.path.includes("..")) {
-    return null;
-  }
-  const filePath = join(process.cwd(), "public", sample.path.slice(1));
-  return existsSync(filePath) ? sample.path : null;
 }
 
 export default async function EbookDetailPage({ params }: EbookPageProps) {
@@ -105,22 +94,11 @@ export default async function EbookDetailPage({ params }: EbookPageProps) {
               ) : (
                 <p className="product-detail__pending" role="status">O link individual de compra na Hotmart ainda não foi informado.</p>
               )}
+              {samplePath && <Link className="btn btn--primary btn--lg" href={`/ebooks/${ebook.slug}/amostra`}>VISUALIZAR AMOSTRA GRÁTIS</Link>}
             </div>
           </div>
         </div>
       </section>
-
-      {ebook.samplePdf ? (
-        <section className="home-section section--featured">
-          <div className="site-container">
-            {samplePath ? (
-              <SamplePdfPreview path={samplePath} authorized title={ebook.title} />
-            ) : (
-              <p className="product-detail__pending">A amostra PDF não está disponível para visualização.</p>
-            )}
-          </div>
-        </section>
-      ) : null}
 
       {relatedBooks.length > 0 && (
         <section className="home-section section--featured" aria-labelledby="related-books-title">
