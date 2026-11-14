@@ -367,7 +367,7 @@ Entregas:
 - Categorias.
 - Biblioteca.
 - Rotas individuais.
-- Links da Hotmart.
+- Links da Hotmart. ## ainda não possuo
 - Visualizador de amostras PDF autorizadas.
 - Estados vazios e conteúdo pendente.
 
