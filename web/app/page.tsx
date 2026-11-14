@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LocalContactForm, LocalNewsletterForm } from "@/components/local-test-forms";
 import { BookCard } from "@/components/book-card";
 import { HomeHeroSlider } from "@/components/home-hero-slider";
 import { SectionHeading } from "@/components/section-heading";
@@ -6,6 +7,8 @@ import { featuredHomeBooks, homeBooks, sliderBooks } from "@/data/home-books";
 import { homeTestimonials } from "@/data/home-testimonials";
 
 export default function HomePage() {
+  const localTest = process.env.NODE_ENV === "development" && process.env.FORMS_LOCAL_TEST === "true";
+  const showForms = localTest || (process.env.FORMS_PUBLIC_TEST === "true" && process.env.FORMS_ENABLED === "true");
   return (
     <main>
       <HomeHeroSlider books={sliderBooks} />
@@ -50,6 +53,7 @@ export default function HomePage() {
                 <p className="newsletter-intro">Novidades e lançamentos da B2B Nutris.</p>
               </div>
               <div>
+                {showForms ? <LocalNewsletterForm localTest={localTest} /> : <>
                 <div className="newsletter-form">
                   <label className="field">
                     <span className="field__label">E-mail</span>
@@ -58,6 +62,7 @@ export default function HomePage() {
                   <button className="btn btn--primary" type="button" disabled>EM BREVE</button>
                 </div>
                 <p className="form-status" role="status">As inscrições serão abertas após a integração do cadastro.</p>
+                </>}
               </div>
             </div>
           </div>
@@ -124,10 +129,10 @@ export default function HomePage() {
             id="contact-title"
             eyebrow="Entre em contato"
             title="Vamos conversar?"
-            description="O canal de contato será habilitado assim que a integração estiver pronta."
+            description={showForms ? "Deixe sua mensagem pelo formulário." : "O canal de contato será habilitado assim que a integração estiver pronta."}
           />
           <div className="contact-card">
-            <div className="contact-form" aria-label="Formulário de contato em preparação">
+            {showForms ? <LocalContactForm localTest={localTest} /> : <div className="contact-form" aria-label="Formulário de contato em preparação">
               <label className="field">
                 <span className="field__label">Nome</span>
                 <input className="control" autoComplete="name" disabled />
@@ -146,7 +151,7 @@ export default function HomePage() {
               </label>
               <button className="btn btn--primary" type="button" disabled>FORMULÁRIO EM PREPARAÇÃO</button>
               <p className="form-status" role="status">Nenhuma mensagem é enviada nesta etapa.</p>
-            </div>
+            </div>}
           </div>
         </div>
       </section>
