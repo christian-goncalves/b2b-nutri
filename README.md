@@ -16,11 +16,13 @@ Use `npm run typecheck` e `npm run build` para verificar os tipos e gerar a apli
 
 A aplicação contém a página inicial, o catálogo e páginas individuais para seis e-books. Os dados do catálogo ficam em `web/data/home-books.ts`.
 
-Newsletter e contato estão desabilitados na interface. O adaptador do Google Sheets foi testado com gravação e leitura de dados fictícios em ambas as abas reais. Os formulários foram testados localmente pelo navegador até as respectivas abas reais, com dados fictícios. Resend não está integrado. Os links individuais da Hotmart e o conteúdo aprovado de privacidade e termos permanecem pendentes. Os depoimentos exibidos estão identificados como exemplos ilustrativos.
+Newsletter e contato registram dados no Google Sheets e usam o Lark Mail para envio. O responsável relatou testes bem-sucedidos do fluxo normal na aplicação identificada como produção: a inscrição recebeu boas-vindas, a mensagem de contato chegou à caixa pública e a resposta aponta para o e-mail informado. Esses resultados foram relatados pelo responsável e não foram verificados diretamente no ambiente de produção neste repositório.
 
-## Google Sheets dos formulários
+Em desenvolvimento, `FORMS_LOCAL_TEST=true` mostra os formulários; o envio também exige `FORMS_ENABLED=true`. A interface pública depende de `FORMS_PUBLIC_TEST=true` e `FORMS_ENABLED=true`. O CP-05 continua aberto para validar falhas, duplicidade concorrente, idempotência e limites de abuso. Supressão de descadastro e retenção de dados também permanecem pendentes antes de campanhas. Consulte o [plano de validação do CP-05](docs/plano-validacao-cp-05.md). Os links individuais da Hotmart e o conteúdo aprovado de privacidade e termos permanecem pendentes. Os depoimentos exibidos estão identificados como exemplos ilustrativos.
 
-O código em `web/lib/forms/` registra inscrições simples e contatos nas abas `Newsletter` e `Contato`. As APIs ficam desativadas por padrão; não habilite a coleta pública antes de concluir privacidade, proteção contra abuso, descadastro e supressão. Não há envio por e-mail.
+## Formulários e e-mail
+
+O código em `web/lib/forms/` registra inscrições simples e contatos nas abas `Newsletter` e `Contato`. Depois de confirmar a gravação no Sheets, a aplicação envia a mensagem pelo SMTP do Lark. A newsletter envia boas-vindas ao endereço cadastrado. O contato encaminha a notificação para `CONTACT_NOTIFICATION_TO`, cujo padrão é `contato@b2bnutris.com`, e usa o e-mail do visitante como endereço de resposta.
 
 Configure exclusivamente no servidor, em `web/.env.local` para desenvolvimento ou nas variáveis do ambiente de execução:
 
@@ -30,22 +32,22 @@ Configure exclusivamente no servidor, em `web/.env.local` para desenvolvimento o
 - `FORMS_ALLOWED_ORIGIN`: origem exata permitida, incluindo protocolo e porta quando aplicável.
 - `FORMS_ENABLED`: somente `true` habilita os endpoints; ausente ou qualquer outro valor os mantém indisponíveis.
 - `FORMS_PUBLIC_TEST`: junto com `FORMS_ENABLED=true`, exibe os formulários públicos no build; ausente ou qualquer outro valor mantém a interface indisponível.
+- `FORMS_LOCAL_TEST`: em desenvolvimento, exibe formulários de teste e permite requisições de loopback.
+- `LARK_SMTP_USER` e `LARK_SMTP_PASSWORD`: credenciais SMTP do servidor Lark. Nunca exponha a senha ao navegador.
+- `LARK_CONTACT_FROM`, `LARK_NEWSLETTER_FROM` e `CONTACT_NOTIFICATION_TO`: remetentes e destino das mensagens. O código define padrões para remetentes e destino.
 
-Para validar os formulários em desenvolvimento, com credenciais e abas de teste autorizadas, inicie o servidor vinculado somente ao próprio computador:
+O formulário local usa as credenciais presentes em `web/.env.local`. Se elas apontarem para a planilha real ou para uma caixa real, cada envio grava dados e envia e-mail de verdade. Não use o formulário local para validar falhas ou duplicidade sem isolar Sheets e SMTP.
 
-```bash
-cd web
-FORMS_LOCAL_TEST=true FORMS_ENABLED=true FORMS_ALLOWED_ORIGIN=http://127.0.0.1:3019 npm run dev -- --hostname 127.0.0.1 --port 3019
-```
+Use adaptadores simulados para os testes automatizados. Para qualquer verificação manual de integração, prepare uma planilha e uma caixa de teste separadas antes de enviar formulários. Siga o plano de validação do CP-05.
 
-Acesse `http://127.0.0.1:3019`. Os formulários de teste aparecem apenas em desenvolvimento com `FORMS_LOCAL_TEST=true` e registram dados na planilha configurada. Use dados fictícios e não exponha esse servidor na rede. Uma tentativa com e-mail existente não cria outra inscrição.
-
-A API Google Sheets deve estar habilitada e a planilha compartilhada com a conta de serviço. As abas precisam existir e ter os seguintes cabeçalhos exatos na primeira linha, nesta ordem:
+O adaptador Google Sheets exige que a API esteja habilitada e que a planilha seja compartilhada com a conta de serviço. As abas precisam existir e ter os seguintes cabeçalhos exatos na primeira linha, nesta ordem:
 
 - `Newsletter`: `email`, `consentimento`, `data_hora`, `origem`, `status`.
 - `Contato`: `nome`, `email`, `assunto`, `mensagem`, `data_hora`.
 
-As gravações usam `RAW`, sem interpretar entradas como fórmulas. O servidor confere os cabeçalhos antes de gravar. A consulta de e-mail evita duplicatas sequenciais e não reativa registros existentes; ela não é atômica e não impede duplicatas concorrentes. Uma falha de rede após uma gravação pode deixar o resultado indeterminado; verifique a planilha antes de repetir. Proteção distribuída contra abuso, fluxo de descadastro e supressão permanecem pendentes.
+As gravações usam `RAW`, sem interpretar entradas como fórmulas. O servidor confere os cabeçalhos antes de gravar. A consulta de e-mail evita duplicatas sequenciais da newsletter e não reativa inscrições existentes; ela não impede duplicatas concorrentes. A idempotência do contato e a proteção contra abuso ainda precisam de implementação e validação. Uma falha de rede após uma gravação pode deixar o resultado indeterminado; verifique a planilha antes de repetir.
+
+O link de descadastro abre uma mensagem para a equipe. A aplicação ainda não registra automaticamente a supressão. Não inicie campanhas antes de implementar e validar esse fluxo e a retenção mínima de endereços descadastrados.
 
 ## Estrutura
 
@@ -54,6 +56,7 @@ As gravações usam `RAW`, sem interpretar entradas como fórmulas. O servidor c
 - `produtos/`: arquivos fonte dos e-books.
 - `docs/roteiro.md`: especificação do produto e protocolo de checkpoints.
 - `docs/decisoes-implementacao.md`: decisões confirmadas e pendências das integrações e amostras.
+- `docs/plano-validacao-cp-05.md`: plano de execução e critérios dos testes dos formulários.
 
 Para configurar o projeto e conduzir alterações, consulte [`AGENTS.md`](AGENTS.md). O `web/AGENTS.md` contém instruções específicas do Next.js.
 

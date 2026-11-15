@@ -1,5 +1,6 @@
 import { Sheets, sheetsConfig } from "./sheets";
 import { InvalidSubmission, persist, validate } from "./submissions";
+import { sendSubmissionEmail } from "./email";
 
 export async function handleSubmission(request: Request, kind: "newsletter" | "contato"): Promise<Response> {
   // Public collection stays disabled until privacy, abuse and suppression requirements are ready.
@@ -35,9 +36,20 @@ export async function handleSubmission(request: Request, kind: "newsletter" | "c
     let input: unknown;
     try { input = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); } catch { throw new InvalidSubmission(); }
     const values = validate(kind, input);
-    const result = await persist(new Sheets(sheetsConfig()), kind, values);
+    const sheets = new Sheets(sheetsConfig());
+    const result = await persist(sheets, kind, values);
     if (result === "existing") return Response.json({ error: "Não foi possível concluir a inscrição." }, { status: 409 });
-    return Response.json({ ok: true });
+    try {
+      if (kind === "newsletter") {
+        await sendSubmissionEmail({ kind, email: values[0] });
+      } else {
+        await sendSubmissionEmail({ kind, nome: values[0], email: values[1], assunto: values[2], mensagem: values[3] });
+      }
+      return Response.json({ ok: true, emailSent: true });
+    } catch {
+      console.error("Form email delivery failed", { kind });
+      return Response.json({ ok: true, emailSent: false });
+    }
   } catch (error) {
     if (error instanceof InvalidSubmission) return Response.json({ error: "Confira os dados informados." }, { status: 400 });
     return Response.json({ error: "Não foi possível registrar os dados. Tente novamente mais tarde." }, { status: 503 });

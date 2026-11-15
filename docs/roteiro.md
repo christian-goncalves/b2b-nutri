@@ -63,7 +63,7 @@ Utilize:
 - Arquivos TypeScript locais para os dados do catálogo.
 - Route Handlers do Next.js para as APIs.
 - Google Sheets API para persistência dos formulários.
-- Resend para envio de e-mails.
+- Lark Mail via SMTP para envio de e-mails dos formulários.
 - Vercel como ambiente de publicação.
 
 Não introduza Tailwind, CMS, Prisma, Supabase ou bibliotecas adicionais sem necessidade demonstrada.
@@ -233,26 +233,15 @@ Implementar API própria utilizando Route Handlers.
 
 Persistência no Google Sheets.
 
-Envio de confirmação pelo Resend.
+Envio de boas-vindas pelo Lark Mail depois do cadastro simples.
 
-Fluxo double opt-in:
-
-1. Receber endereço e consentimento.
-2. Validar os dados.
-3. Registrar inscrição pendente.
-4. Gerar token seguro, aleatório, com expiração.
-5. Armazenar somente o hash do token.
-6. Enviar link de confirmação pelo Resend.
-7. Confirmar o token no servidor.
-8. Marcar a inscrição como ativa.
-9. Impedir reutilização do token.
-10. Permitir reenvio controlado e descadastramento.
+Usar single opt-in, conforme a decisão registrada em `docs/decisoes-implementacao.md`. A inscrição fica ativa após o envio do formulário e não expira automaticamente. O token e a expiração do fluxo double opt-in não se aplicam.
 
 Registrar origem da inscrição e, quando aplicável, o identificador do próximo lançamento.
 
-Projetar o tratamento de concorrência e duplicidades considerando as limitações do Google Sheets.
+Impedir inscrições duplicadas da newsletter, inclusive em requisições concorrentes. Projetar o tratamento considerando que a leitura seguida de gravação no Google Sheets não é atômica.
 
-Não declarar uma inscrição ativa antes da confirmação.
+Marcar a inscrição como ativa depois de validar e persistir o formulário com consentimento.
 
 #### Contato
 
@@ -268,10 +257,10 @@ Fluxo:
 1. Validar dados no servidor.
 2. Aplicar proteção contra spam.
 3. Registrar a mensagem no Google Sheets.
-4. Enviar notificação pelo Resend.
+4. Enviar notificação pelo Lark Mail.
 5. Retornar resultado consistente ao usuário.
 
-Tratar separadamente falhas de persistência e falhas de envio para evitar perda de registros ou notificações duplicadas.
+Tratar separadamente falhas de persistência e falhas de envio. Usar uma chave de idempotência para que uma repetição técnica da mesma solicitação de contato não gere outra linha ou notificação.
 
 #### Segurança
 
@@ -285,7 +274,7 @@ Tratar separadamente falhas de persistência e falhas de envio para evitar perda
 - Política de privacidade e consentimento explícito.
 - Não expor publicamente a planilha de contatos.
 
-Não utilizar armazenamento temporário em memória como fonte definitiva de inscrições.
+Não utilizar armazenamento temporário em memória como fonte definitiva de inscrições, idempotência ou rate limit.
 
 ### 10. SEO, acessibilidade e desempenho
 
@@ -377,11 +366,13 @@ Validar cada produto e suas associações.
 
 Entregas:
 - Integração com Google Sheets.
-- Integração com Resend.
-- Newsletter com double opt-in.
+- Integração de envio pelo Lark Mail via SMTP, conforme decisão mais recente em `docs/decisoes-implementacao.md`.
+- Newsletter com single opt-in, conforme decisão registrada em `docs/decisoes-implementacao.md`.
 - Formulário de contato.
-- Proteções e validações.
-- Testes de falha, duplicidade e expiração.
+- Validação no servidor, honeypot funcional, limite de tamanho e origem, e rate limit com armazenamento compartilhado.
+- Idempotência por solicitação no contato e deduplicação concorrente da newsletter.
+- Testes isolados de falha, duplicidade, idempotência e validação. O token de confirmação com expiração foi substituído pelo single opt-in. A retenção de mensagens de contato por 12 meses após resolução é requisito separado de privacidade.
+- Seguir o [plano de validação do CP-05](plano-validacao-cp-05.md) e anexar as evidências ao checkpoint.
 
 Caso faltem credenciais, implementar a estrutura testável com adaptadores simulados, documentar as variáveis necessárias e aguardar configuração. Nunca simular sucesso de uma integração real.
 
@@ -439,7 +430,7 @@ O projeto somente estará concluído quando:
 - Os links de compra forem válidos e fornecidos pelo responsável.
 - Nenhum PDF comercial completo estiver exposto publicamente.
 - Os formulários estiverem operacionais e testados.
-- O double opt-in funcionar de ponta a ponta.
+- O single opt-in registrar a inscrição e enviar uma mensagem de boas-vindas.
 - As credenciais estiverem protegidas.
 - Os testes e o build de produção passarem.
 - A documentação permitir manutenção futura.

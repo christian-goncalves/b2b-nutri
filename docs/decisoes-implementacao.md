@@ -1,10 +1,28 @@
 # Decisões de implementação
 
 **Projeto:** B2B Nutris  
-**Atualizado:** 2026-11-13  
-**Propósito:** registrar decisões tomadas na conversa sobre formulários, e-mail, amostras de e-books e privacidade.
+**Propósito:** registrar decisões sobre formulários, e-mail, amostras de e-books e privacidade.
 
-Este registro complementa [roteiro.md](roteiro.md). Onde uma decisão abaixo divergir do roteiro, vale a decisão explícita mais recente do responsável pelo projeto. Este documento registra requisitos; não significa que as funcionalidades já foram implementadas ou que integrações foram validadas em produção.
+Este registro complementa [roteiro.md](roteiro.md). Onde uma decisão abaixo divergir do roteiro, vale a decisão explícita mais recente do responsável pelo projeto. Os requisitos, as implementações e as validações relatadas aparecem em seções distintas.
+
+## Atualização do canal de e-mail (2026-11-15)
+
+- Usar o Lark Mail como serviço de envio da aplicação, via SMTP. Esta decisão substitui o Resend como transporte dos formulários.
+- Usar `contato@b2bnutris.com` como caixa pública para notificações do contato e `newsletter@b2bnutris.com` como remetente de boas-vindas. `newsletter@` é alias da caixa pública `contato@`.
+- Notificações do formulário de contato devem chegar a `contato@b2bnutris.com`, com o e-mail informado pelo visitante no campo de resposta.
+- A aplicação deve registrar cada submissão no Google Sheets antes de tentar o envio. Se o registro for confirmado e o e-mail falhar, informar que o registro foi salvo e que o formulário não deve ser reenviado.
+- O responsável configurou e ativou o serviço SMTP da caixa pública do Lark. Usar `contato@b2bnutris.com` como usuário SMTP e guardar `LARK_SMTP_USER` e `LARK_SMTP_PASSWORD` somente no ambiente servidor.
+- `LARK_CONTACT_FROM`, `CONTACT_NOTIFICATION_TO` e `LARK_NEWSLETTER_FROM` definem os remetentes e destino; os valores esperados estão em `web/.env.example` e não são secretos.
+- O descadastro automatizado e a lista de supressão continuam pendentes; não iniciar campanhas de newsletter até concluí-los.
+
+## Validação relatada do fluxo de e-mail (2026-11-15)
+
+- O responsável relatou que a inscrição de newsletter gravou na aba `Newsletter` e entregou a mensagem de boas-vindas.
+- O responsável relatou que o formulário de contato gravou na aba `Contato` e entregou a notificação à caixa pública do Lark.
+- O responsável confirmou que a resposta à notificação de contato aponta para o e-mail informado no formulário.
+- O link de descadastro abriu uma mensagem para a equipe, que chegou à caixa pública. A aplicação ainda não transforma esse pedido em supressão automática.
+- Esses resultados vieram de testes manuais relatados pelo responsável. O estado atual das variáveis e do ambiente de produção não foi inspecionado neste repositório.
+- O CP-05 permanece aberto. O plano em [plano-validacao-cp-05.md](plano-validacao-cp-05.md) define os testes restantes de falha, duplicidade, idempotência e proteção contra abuso.
 
 ## Decisão posterior sobre as amostras (2026-11-14)
 
@@ -18,8 +36,9 @@ O responsável aprovou visualmente as seis amostras de cinco páginas e dispenso
 - Usar inscrição simples (single opt-in). A inscrição fica ativa após o envio do formulário, sem etapa de confirmação por e-mail.
 - Exibir uma caixa de consentimento explícita e inicialmente desmarcada.
 - Registrar endereço, consentimento, data/hora e origem da inscrição.
-- Enviar uma mensagem de boas-vindas pelo Resend.
+- Enviar uma mensagem de boas-vindas. A decisão anterior pelo Resend foi substituída pela atualização do canal de e-mail no início deste documento.
 - Incluir link de descadastro. Preservar o estado mínimo de supressão após o descadastro para impedir reativação e novos envios acidentais.
+- Manter a inscrição ativa até um pedido explícito de descadastro. Não usar expiração automática da inscrição.
 - Usar `newsletter@b2bnutris.com` como remetente aprovado.
 
 Esta decisão substitui especificamente o double opt-in descrito em `roteiro.md`. Os demais requisitos de segurança, validação e proteção contra abuso continuam aplicáveis.
@@ -28,7 +47,8 @@ Esta decisão substitui especificamente o double opt-in descrito em `roteiro.md`
 
 - Persistir os dados na mesma planilha dedicada, em uma aba separada chamada `Contato`.
 - Coletar nome, e-mail, assunto e mensagem.
-- Notificar a equipe pelo Resend e mostrar o resultado do envio no próprio site.
+- Notificar a equipe pelo Lark Mail e mostrar o resultado do envio no próprio site.
+- Impedir o processamento repetido da mesma solicitação por uma chave de idempotência, sem bloquear uma nova mensagem enviada intencionalmente.
 - Não enviar resposta automática ao visitante nesta etapa.
 - Usar o mesmo canal público para pedidos de privacidade e mensagens de contato, quando esse canal estiver definido.
 
@@ -53,19 +73,19 @@ Esta decisão substitui especificamente o double opt-in descrito em `roteiro.md`
 
 ## Estado conhecido e pendências
 
-- O domínio `b2bnutris.com` está na Hostinger e foi adicionado ao Resend. A configuração DNS foi iniciada pelo responsável.
-- O responsável informou que o DKIM (`resend._domainkey`) e o CNAME `send` já estavam aceitos e que o CNAME `rsend` continuava em verificação. A validação completa do domínio no Resend ainda não foi confirmada neste registro. A propagação DNS não impede o trabalho de implementação que não dependa do envio real.
-- O responsável escolheu usar Resend para envio e não contratar uma caixa postal da Hostinger neste início.
-- O Resend será usado como serviço de envio. Ainda falta definir e configurar como a equipe receberá respostas e pedidos de privacidade. Um endereço de remetente no Resend, por si só, não estabelece uma caixa de entrada.
-- `contato@b2bnutris.com` é uma sugestão de endereço, não uma caixa de entrada confirmada.
-- O destino Google Sheets, suas credenciais, as variáveis do ambiente de produção e o endereço de notificação ainda precisam ser configurados e validados.
+- A Hostinger continua sendo o provedor DNS do domínio. O Lark Mail é o serviço escolhido para a caixa pública e para o envio SMTP dos formulários.
+- Registros DNS do Resend podem permanecer no domínio, mas o fluxo atual dos formulários usa Lark SMTP.
+- O responsável relatou gravações no Google Sheets e entregas de e-mail nos testes manuais. A leitura direta das variáveis de produção e do estado atual do provedor não foi feita nesta revisão.
+- O tratamento automatizado de descadastro e a supressão permanecem pendentes. Não iniciar campanhas antes de implementar e validar esses controles.
+- O plano do CP-05 cobre falhas, deduplicação concorrente da newsletter, idempotência de contato e proteção contra abuso. O token de confirmação com expiração descrito no roteiro antigo não se aplica ao single opt-in.
+- Mensagens de contato devem ser apagadas ou anonimizadas 12 meses após a resolução do assunto. Esse prazo é distinto da validade da inscrição da newsletter.
 - Os arquivos de amostra separados ainda precisam ser preparados e revisados. Os links Hotmart também dependem dos endereços fornecidos para cada produto.
 
 ## Próximas dependências para implementação
 
-1. Escolher/configurar o canal de recebimento da equipe e confirmar o endereço público de contato e privacidade.
-2. Criar ou indicar a planilha Google Sheets e as abas `Newsletter` e `Contato`; configurar acesso de serviço apenas no servidor.
-3. Configurar as credenciais e remetentes do Resend no ambiente de produção e concluir a verificação de DNS.
-4. Preparar os seis PDFs de amostra de cinco páginas e revisar acessibilidade de cada arquivo.
-5. Implementar e validar os fluxos dentro dos checkpoints definidos em `roteiro.md`.
+1. Executar o plano de validação dos formulários antes de fechar o CP-05.
+2. Definir e implementar armazenamento atômico para deduplicação concorrente e idempotência.
+3. Definir o limite e a janela do rate limit e implementar armazenamento compartilhado para esse controle.
+4. Implementar o fluxo de descadastro e a lista de supressão antes de campanhas.
+5. Preparar os seis PDFs de amostra de cinco páginas e revisar acessibilidade de cada arquivo.
 
