@@ -5,6 +5,11 @@ type SubmissionEmail =
   | { kind: "newsletter"; email: string }
   | { kind: "contato"; nome: string; email: string; assunto: string; mensagem: string };
 
+type SubmissionEmailResult = {
+  emailSent: boolean;
+  confirmationEmailSent?: boolean;
+};
+
 let transporter: Transporter | undefined;
 
 function smtpTransport(): Transporter {
@@ -28,7 +33,7 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
 }
 
-export async function sendSubmissionEmail(submission: SubmissionEmail): Promise<void> {
+export async function sendSubmissionEmail(submission: SubmissionEmail): Promise<SubmissionEmailResult> {
   const user = process.env.LARK_SMTP_USER;
   if (!user) throw new Error("Lark SMTP configuration unavailable");
   const transport = smtpTransport();
@@ -46,7 +51,7 @@ export async function sendSubmissionEmail(submission: SubmissionEmail): Promise<
       text: `Olá!\n\nSua inscrição na newsletter B2B Nutris foi registrada. Você receberá novidades e lançamentos.\n\nPara cancelar a inscrição: ${unsubscribe}`,
       html: `<main style="font-family:Arial,sans-serif;line-height:1.6;color:#252525"><h1 style="font-size:22px">Bem-vindo à newsletter B2B Nutris</h1><p>Sua inscrição foi registrada. Você receberá novidades e lançamentos da B2B Nutris.</p><p><a href="${unsubscribe}">Cancelar inscrição</a></p></main>`,
     });
-    return;
+    return { emailSent: true };
   }
 
   const from = process.env.LARK_CONTACT_FROM || "contato@b2bnutris.com";
@@ -63,4 +68,18 @@ export async function sendSubmissionEmail(submission: SubmissionEmail): Promise<
     text: `Nome: ${submission.nome}\nE-mail: ${submission.email}\nAssunto: ${submission.assunto}\n\n${submission.mensagem}`,
     html: `<main style="font-family:Arial,sans-serif;line-height:1.6;color:#252525"><h1 style="font-size:22px">Nova mensagem pelo formulário</h1><p><strong>Nome:</strong> ${safeName}<br><strong>E-mail:</strong> ${safeEmail}<br><strong>Assunto:</strong> ${safeSubject}</p><p>${safeMessage}</p></main>`,
   });
+
+  try {
+    await transport.sendMail({
+      from: { name: "B2B Nutris | Contato", address: from },
+      to: submission.email,
+      replyTo: recipient,
+      subject: "Recebemos sua solicitação | B2B Nutris",
+      text: `Olá, ${submission.nome}!\n\nRecebemos sua mensagem. Nossa equipe analisará sua solicitação e entrará em contato o mais breve possível com uma resposta.\n\nAtenciosamente,\nEquipe B2B Nutris`,
+      html: `<main style="font-family:Arial,sans-serif;line-height:1.6;color:#252525"><h1 style="font-size:22px">Recebemos sua mensagem</h1><p>Olá, ${safeName}!</p><p>Nossa equipe analisará sua solicitação e entrará em contato o mais breve possível com uma resposta.</p><p>Atenciosamente,<br>Equipe B2B Nutris</p></main>`,
+    });
+    return { emailSent: true, confirmationEmailSent: true };
+  } catch {
+    return { emailSent: true, confirmationEmailSent: false };
+  }
 }

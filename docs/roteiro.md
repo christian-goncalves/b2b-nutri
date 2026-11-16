@@ -392,6 +392,8 @@ Entregas:
 
 Não realizar publicação efetiva sem autorização explícita.
 
+**Autorização registrada em 2026-11-16:** o responsável autorizou o deploy inicial do CP-06 antes dos testes de produção de rate limit no Redis e de contato com deduplicação. Esta autorização permite a publicação inicial e os testes descritos pelo responsável; não registra seus resultados nem encerra os critérios restantes do checkpoint.
+
 ### 13. Protocolo obrigatório de checkpoints
 
 Ao concluir cada fase, apresente:

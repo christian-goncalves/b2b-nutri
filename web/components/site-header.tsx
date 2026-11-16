@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MobileMenu } from "./mobile-menu";
 
 const links = [
   { href: "/", label: "INÍCIO" },
@@ -23,22 +24,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <details className="foundation-mobile-menu">
-          <summary aria-label="Abrir menu">
-            <span className="foundation-menu-icon" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </span>
-          </summary>
-          <nav className="foundation-mobile-nav" aria-label="Navegação principal">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </details>
+        <MobileMenu links={links} />
       </div>
     </header>
   );

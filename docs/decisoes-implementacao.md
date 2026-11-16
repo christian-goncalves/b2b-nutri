@@ -5,6 +5,14 @@
 
 Este registro complementa [roteiro.md](roteiro.md). Onde uma decisão abaixo divergir do roteiro, vale a decisão explícita mais recente do responsável pelo projeto. Os requisitos, as implementações e as validações relatadas aparecem em seções distintas.
 
+## Decisão posterior sobre confirmação de contato (2026-11-16)
+
+- Depois de registrar uma mensagem de contato e enviar a notificação à equipe, enviar uma confirmação ao endereço informado pelo visitante.
+- A confirmação deve informar que a solicitação foi recebida e que a equipe entrará em contato o mais breve possível com uma resposta.
+- Usar `contato@b2bnutris.com` como remetente e permitir resposta à caixa pública.
+- Se a notificação à equipe falhar, não enviar a confirmação ao visitante. Se apenas a confirmação falhar, preservar o registro e a notificação já enviada, informar essa falha na resposta da API e orientar o visitante a não reenviar o formulário.
+- Esta decisão posterior substitui a decisão anterior de não responder automaticamente ao visitante.
+
 ## Atualização do canal de e-mail (2026-11-15)
 
 - Usar o Lark Mail como serviço de envio da aplicação, via SMTP. Esta decisão substitui o Resend como transporte dos formulários.

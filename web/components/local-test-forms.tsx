@@ -73,14 +73,18 @@ function useSubmission(kind: Kind, localTest: boolean) {
         form.reset();
         idempotencyRef.current = null;
         const emailSent = Boolean(result && typeof result === "object" && "emailSent" in result && result.emailSent === true);
+        const confirmationEmailSent = Boolean(result && typeof result === "object" && "confirmationEmailSent" in result && result.confirmationEmailSent === true);
         setStatus("");
-        setFeedback(emailSent
-          ? kind === "newsletter"
+        const nextFeedback = kind === "newsletter"
+          ? emailSent
             ? { title: "Cadastro concluído", message: "Seu cadastro na newsletter foi concluído com sucesso." }
-            : { title: "Contato registrado", message: "Seu contato foi registrado com sucesso. Retornaremos o mais breve possível." }
-          : kind === "newsletter"
-            ? { title: "Cadastro registrado", message: "Seu cadastro foi salvo, mas não conseguimos enviar o e-mail de boas-vindas. Não envie o formulário novamente." }
-            : { title: "Contato registrado", message: "Seu contato foi registrado, mas não conseguimos enviar a notificação à equipe. Não envie o formulário novamente." });
+            : { title: "Cadastro registrado", message: "Seu cadastro foi salvo, mas não conseguimos enviar o e-mail de boas-vindas. Não envie o formulário novamente." }
+          : !emailSent
+            ? { title: "Contato registrado", message: "Seu contato foi registrado, mas não conseguimos enviar a notificação à equipe. Não envie o formulário novamente." }
+            : !confirmationEmailSent
+              ? { title: "Contato registrado", message: "Seu contato foi enviado à equipe, mas não conseguimos enviar a confirmação para seu e-mail. Não envie o formulário novamente." }
+              : { title: "Contato registrado", message: "Recebemos sua solicitação. Nossa equipe entrará em contato o mais breve possível com uma resposta." };
+        setFeedback(nextFeedback);
       }
     } catch {
       setStatus("Não foi possível confirmar o registro. Entre em contato com a equipe antes de tentar novamente.");
