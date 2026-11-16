@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/jobs/anonymize-resolved-contacts",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}

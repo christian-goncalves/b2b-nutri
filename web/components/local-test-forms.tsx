@@ -45,6 +45,7 @@ function useSubmission(kind: Kind, localTest: boolean) {
   const [status, setStatus] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [feedback, setFeedback] = useState<SubmissionFeedback | null>(null);
+  const idempotencyRef = useRef<{ key: string; payload: string } | null>(null);
   const closeFeedback = useCallback(() => setFeedback(null), []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -55,15 +56,22 @@ function useSubmission(kind: Kind, localTest: boolean) {
     const payload = kind === "newsletter"
       ? { email: data.get("email"), consentimento: data.get("consentimento") === "on", origem: localTest ? "teste-local-home" : "home" }
       : { nome: data.get("nome"), email: data.get("email"), assunto: data.get("assunto"), mensagem: data.get("mensagem") };
+    const payloadFingerprint = JSON.stringify(payload);
+    if (kind === "contato" && (!idempotencyRef.current || idempotencyRef.current.payload !== payloadFingerprint)) {
+      idempotencyRef.current = { key: crypto.randomUUID(), payload: payloadFingerprint };
+    }
     setPending(true);
     setStatus("Enviando...");
     try {
-      const response = await fetch(`/api/${kind}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const headers = new Headers({ "Content-Type": "application/json" });
+      if (kind === "contato" && idempotencyRef.current) headers.set("Idempotency-Key", idempotencyRef.current.key);
+      const response = await fetch(`/api/${kind}`, { method: "POST", headers, body: JSON.stringify(payload) });
       if (!response.ok) {
         setStatus(response.status === 409 ? "Este cadastro não pôde ser concluído." : "Não foi possível confirmar o registro. Entre em contato com a equipe antes de tentar novamente.");
       } else {
         const result: unknown = await response.json().catch(() => null);
         form.reset();
+        idempotencyRef.current = null;
         const emailSent = Boolean(result && typeof result === "object" && "emailSent" in result && result.emailSent === true);
         setStatus("");
         setFeedback(emailSent

@@ -1,8 +1,17 @@
 import { Sheets, sheetsConfig } from "./sheets";
-import { InvalidSubmission, persist, validate } from "./submissions";
+import { InvalidSubmission, CONTACT_HEADERS, NEWSLETTER_HEADERS, validate } from "./submissions";
 import { sendSubmissionEmail } from "./email";
+import { randomUUID } from "node:crypto";
+import { FormStateStore, UpstashFormStateStore, upstashConfig } from "./shared-kv";
 
-export async function handleSubmission(request: Request, kind: "newsletter" | "contato"): Promise<Response> {
+type FormKind = "newsletter" | "contato";
+type FormAdapters = {
+  sheets: Pick<Sheets, "verifyHeaders" | "emails" | "append">;
+  sendEmail: typeof sendSubmissionEmail;
+  store: FormStateStore;
+};
+
+export async function handleSubmission(request: Request, kind: FormKind, adapters?: FormAdapters): Promise<Response> {
   // Public collection stays disabled until privacy, abuse and suppression requirements are ready.
   if (process.env.FORMS_ENABLED !== "true") return Response.json({ error: "Formulário indisponível." }, { status: 503 });
   const origin = request.headers.get("origin");
@@ -17,8 +26,13 @@ export async function handleSubmission(request: Request, kind: "newsletter" | "c
     } catch { allowed = false; }
   }
   if (!allowed) return Response.json({ error: "Origem não permitida." }, { status: 403 });
+  if (request.method !== "POST") return Response.json({ error: "Método não permitido." }, { status: 405 });
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) return Response.json({ error: "Conteúdo inválido." }, { status: 415 });
   try {
+    const ip = request.headers.get("x-real-ip")?.trim();
+    if (!ip) throw new Error("Client IP unavailable");
+    const store = adapters?.store ?? new UpstashFormStateStore(upstashConfig());
+    if (await store.consumeRateLimit(ip, Date.now()) > 5) return Response.json({ error: "Limite de envios atingido. Tente novamente em 15 minutos." }, { status: 429 });
     const reader = request.body?.getReader();
     if (!reader) throw new InvalidSubmission();
     const chunks: Uint8Array[] = [];
@@ -36,14 +50,39 @@ export async function handleSubmission(request: Request, kind: "newsletter" | "c
     let input: unknown;
     try { input = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); } catch { throw new InvalidSubmission(); }
     const values = validate(kind, input);
-    const sheets = new Sheets(sheetsConfig());
-    const result = await persist(sheets, kind, values);
-    if (result === "existing") return Response.json({ error: "Não foi possível concluir a inscrição." }, { status: 409 });
+    const sheets = adapters?.sheets ?? new Sheets(sheetsConfig());
+    const requestKey = kind === "newsletter" ? `newsletter:${values[0]}` : `contact:${request.headers.get("idempotency-key") || ""}`;
+    if (kind === "contato" && !/^contact:[A-Za-z0-9-]{16,100}$/.test(requestKey)) throw new InvalidSubmission();
+    const claimToken = randomUUID();
+    const claim = await store.claim(requestKey, claimToken);
+    if (claim === "suppressed") return Response.json({ error: "Este endereço não pode ser reinscrito." }, { status: 409 });
+    if (claim === "existing") return Response.json({ error: "Esta solicitação já foi processada." }, { status: 409 });
+    if (claim === "pending") return Response.json({ error: "Esta solicitação está sendo processada ou precisa de conferência antes de nova tentativa." }, { status: 409 });
+
+    try {
+      await sheets.verifyHeaders(kind === "newsletter" ? "Newsletter" : "Contato", kind === "newsletter" ? NEWSLETTER_HEADERS : CONTACT_HEADERS);
+      if (kind === "newsletter" && (await sheets.emails()).includes(values[0])) {
+        await store.complete(requestKey, claimToken, "active");
+        return Response.json({ error: "Não foi possível concluir a inscrição." }, { status: 409 });
+      }
+    } catch (error) {
+      await store.release(requestKey, claimToken);
+      throw error;
+    }
+    try {
+      await sheets.append(kind === "newsletter" ? "Newsletter" : "Contato", values);
+    } catch {
+      // The provider may have committed the row before a timeout. Keep the claim to prevent duplicates.
+      return Response.json({ error: "Não foi possível confirmar o registro. Consulte a planilha antes de tentar novamente." }, { status: 503 });
+    }
+    if (!await store.complete(requestKey, claimToken, kind === "newsletter" ? "active" : "completed")) {
+      return Response.json({ error: "O registro foi salvo, mas precisa de conferência antes de novo envio." }, { status: 503 });
+    }
     try {
       if (kind === "newsletter") {
-        await sendSubmissionEmail({ kind, email: values[0] });
+        await (adapters?.sendEmail ?? sendSubmissionEmail)({ kind, email: values[0] });
       } else {
-        await sendSubmissionEmail({ kind, nome: values[0], email: values[1], assunto: values[2], mensagem: values[3] });
+        await (adapters?.sendEmail ?? sendSubmissionEmail)({ kind, nome: values[0], email: values[1], assunto: values[2], mensagem: values[3] });
       }
       return Response.json({ ok: true, emailSent: true });
     } catch {

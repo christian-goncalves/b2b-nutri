@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:forms": "node tests/run-forms.cjs",
+    "test:forms:integration": "node tests/run-forms-integration.cjs",
+    "test:forms:providers": "node tests/run-forms-providers-integration.cjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

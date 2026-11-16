@@ -1,4 +1,5 @@
 import nodemailer, { type Transporter } from "nodemailer";
+import { createUnsubscribeToken } from "./unsubscribe";
 
 type SubmissionEmail =
   | { kind: "newsletter"; email: string }
@@ -34,14 +35,16 @@ export async function sendSubmissionEmail(submission: SubmissionEmail): Promise<
 
   if (submission.kind === "newsletter") {
     const from = process.env.LARK_NEWSLETTER_FROM || "newsletter@b2bnutris.com";
-    const unsubscribe = `mailto:contato@b2bnutris.com?subject=${encodeURIComponent("Descadastro da newsletter")}`;
+    const origin = process.env.FORMS_ALLOWED_ORIGIN || "https://b2bnutris.com";
+    const token = createUnsubscribeToken(submission.email);
+    const unsubscribe = `${origin}/api/newsletter/unsubscribe?token=${encodeURIComponent(token)}`;
     await transport.sendMail({
       from: { name: "B2B Nutris", address: from },
       to: submission.email,
       replyTo: "contato@b2bnutris.com",
       subject: "Sua inscrição na newsletter B2B Nutris",
-      text: `Olá!\n\nSua inscrição na newsletter B2B Nutris foi registrada. Você receberá novidades e lançamentos.\n\nPara solicitar o descadastro, responda a este e-mail ou escreva para contato@b2bnutris.com.`,
-      html: `<main style="font-family:Arial,sans-serif;line-height:1.6;color:#252525"><h1 style="font-size:22px">Bem-vindo à newsletter B2B Nutris</h1><p>Sua inscrição foi registrada. Você receberá novidades e lançamentos da B2B Nutris.</p><p>Para solicitar o descadastro, <a href="${unsubscribe}">envie uma mensagem para nossa equipe</a>.</p></main>`,
+      text: `Olá!\n\nSua inscrição na newsletter B2B Nutris foi registrada. Você receberá novidades e lançamentos.\n\nPara cancelar a inscrição: ${unsubscribe}`,
+      html: `<main style="font-family:Arial,sans-serif;line-height:1.6;color:#252525"><h1 style="font-size:22px">Bem-vindo à newsletter B2B Nutris</h1><p>Sua inscrição foi registrada. Você receberá novidades e lançamentos da B2B Nutris.</p><p><a href="${unsubscribe}">Cancelar inscrição</a></p></main>`,
     });
     return;
   }

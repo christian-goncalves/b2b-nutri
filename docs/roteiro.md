@@ -374,6 +374,8 @@ Entregas:
 - Testes isolados de falha, duplicidade, idempotência e validação. O token de confirmação com expiração foi substituído pelo single opt-in. A retenção de mensagens de contato por 12 meses após resolução é requisito separado de privacidade.
 - Seguir o [plano de validação do CP-05](plano-validacao-cp-05.md) e anexar as evidências ao checkpoint.
 
+**Validação registrada em 2026-11-15:** o responsável declarou o CP-05 aprovado após revisar os resultados de 12 testes automatizados, a verificação de tipos, o preflight de Upstash e Google Sheets, a integração sintética e a confirmação manual de entrega das mensagens de boas-vindas e contato. O checkpoint está validado por decisão do responsável. Os cenários do plano sem evidência reproduzida continuam identificados como lacunas de teste; esta aprovação não os registra como executados.
+
 Caso faltem credenciais, implementar a estrutura testável com adaptadores simulados, documentar as variáveis necessárias e aguardar configuração. Nunca simular sucesso de uma integração real.
 
 **CP-06: Qualidade e publicação**

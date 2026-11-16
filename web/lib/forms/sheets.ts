@@ -34,20 +34,30 @@ export class Sheets {
     return data.access_token;
   }
 
-  private async call(range: string, init?: RequestInit): Promise<Response> {
+  private async call(range: string, init?: RequestInit, suffix = ""): Promise<Response> {
     const token = await this.token();
     const base = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(this.config.spreadsheetId)}/values/${encodeURIComponent(range)}`;
-    const response = await this.request(`${base}${init ? ":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS" : ""}`, { ...init, headers: { Authorization: `Bearer ${token}`, ...(init ? { "Content-Type": "application/json" } : {}) }, cache: "no-store", signal: AbortSignal.timeout(10000) });
+    const response = await this.request(`${base}${suffix}`, { ...init, headers: { Authorization: `Bearer ${token}`, ...(init ? { "Content-Type": "application/json" } : {}) }, cache: "no-store", signal: AbortSignal.timeout(10000) });
     if (!response.ok) throw new Error("Google Sheets request failed");
     return response;
   }
 
   async verifyHeaders(sheet: SheetName, expected: string[]): Promise<void> {
-    const response = await this.call(`'${sheet}'!A1:${String.fromCharCode(64 + expected.length)}1`);
+    const row = await this.readHeaders(sheet, String.fromCharCode(64 + expected.length));
+    if (row.length !== expected.length || expected.some((value, index) => row[index] !== value)) throw new Error("Google Sheets headers do not match");
+  }
+
+  async readHeaders(sheet: SheetName, lastColumn: string): Promise<string[]> {
+    const response = await this.call(`'${sheet}'!A1:${lastColumn}1`);
     const data: unknown = await response.json();
     if (!data || typeof data !== "object" || !("values" in data) || !Array.isArray(data.values) || !Array.isArray(data.values[0])) throw new Error("Google Sheets headers do not match");
-    const row: unknown[] = data.values[0];
-    if (row.length !== expected.length || expected.some((value, index) => row[index] !== value)) throw new Error("Google Sheets headers do not match");
+    return data.values[0].map((value: unknown) => typeof value === "string" ? value : "");
+  }
+
+  async writeContactResolutionHeader(): Promise<void> {
+    const response = await this.call("'Contato'!F1", { method: "PUT", body: JSON.stringify({ majorDimension: "ROWS", values: [["resolvido_em"]] }) }, "?valueInputOption=RAW");
+    const data: unknown = await response.json();
+    if (!data || typeof data !== "object" || !("updatedCells" in data) || data.updatedCells !== 1) throw new Error("Google Sheets header update not confirmed");
   }
 
   async emails(): Promise<string[]> {
@@ -58,8 +68,21 @@ export class Sheets {
   }
 
   async append(sheet: SheetName, values: string[]): Promise<void> {
-    const response = await this.call(`'${sheet}'!A:${String.fromCharCode(64 + values.length)}`, { method: "POST", body: JSON.stringify({ majorDimension: "ROWS", values: [values] }) });
+    const response = await this.call(`'${sheet}'!A:${String.fromCharCode(64 + values.length)}`, { method: "POST", body: JSON.stringify({ majorDimension: "ROWS", values: [values] }) }, ":append?valueInputOption=RAW&insertDataOption=INSERT_ROWS");
     const data: unknown = await response.json();
     if (!data || typeof data !== "object" || !("updates" in data) || !data.updates || typeof data.updates !== "object" || !("updatedRows" in data.updates) || data.updates.updatedRows !== 1) throw new Error("Google Sheets write not confirmed");
+  }
+
+  async contactsForRetention(): Promise<Array<{ row: number; resolvedAt: string }>> {
+    const response = await this.call("'Contato'!A2:F");
+    const data: unknown = await response.json();
+    if (!data || typeof data !== "object" || !("values" in data) || !Array.isArray(data.values)) throw new Error("Invalid Google Sheets response");
+    return data.values.flatMap((row: unknown, index: number) => Array.isArray(row) && typeof row[5] === "string" && row[5].trim() ? [{ row: index + 2, resolvedAt: row[5].trim() }] : []);
+  }
+
+  async anonymizeContact(row: number): Promise<void> {
+    const response = await this.call(`'Contato'!A${row}:D${row}`, { method: "PUT", body: JSON.stringify({ majorDimension: "ROWS", values: [["Anonimizado", "", "Mensagem anonimizada", ""]] }) }, "?valueInputOption=RAW");
+    const data: unknown = await response.json();
+    if (!data || typeof data !== "object" || !("updatedRows" in data) || data.updatedRows !== 1) throw new Error("Google Sheets anonymization not confirmed");
   }
 }

@@ -1,7 +1,7 @@
 import { Sheets } from "./sheets";
 
 export const NEWSLETTER_HEADERS = ["email", "consentimento", "data_hora", "origem", "status"];
-export const CONTACT_HEADERS = ["nome", "email", "assunto", "mensagem", "data_hora"];
+export const CONTACT_HEADERS = ["nome", "email", "assunto", "mensagem", "data_hora", "resolvido_em"];
 
 export class InvalidSubmission extends Error {}
 function field(data: Record<string, unknown>, name: string, max: number): string {
@@ -23,7 +23,7 @@ export function validate(kind: "newsletter" | "contato", input: unknown): string
     const origin = field(data, "origem", 100);
     return [email(data), "sim", new Date().toISOString(), origin, "ativo"];
   }
-  return [field(data, "nome", 120), email(data), field(data, "assunto", 200), field(data, "mensagem", 5000), new Date().toISOString()];
+  return [field(data, "nome", 120), email(data), field(data, "assunto", 200), field(data, "mensagem", 5000), new Date().toISOString(), ""];
 }
 export async function persist(sheets: Pick<Sheets, "verifyHeaders" | "emails" | "append">, kind: "newsletter" | "contato", values: string[]): Promise<"created" | "existing"> {
   const sheet = kind === "newsletter" ? "Newsletter" : "Contato";
