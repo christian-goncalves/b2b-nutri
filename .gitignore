@@ -22,3 +22,25 @@ coverage/
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
+
+# Keep commercial PDFs and unpublished editorial drafts out of Git.
+# Only the separately authorized five-page samples may be versioned.
+**/*.pdf
+!amostras-revisao/da-escuta-a-conduta.pdf
+!amostras-revisao/guia-visual-das-vitaminas.pdf
+!amostras-revisao/mente-clinica-vol-01.pdf
+!amostras-revisao/mente-clinica-vol-02.pdf
+!amostras-revisao/minerais.pdf
+!amostras-revisao/suplementacao-clinica.pdf
+!web/public/samples/da-escuta-a-conduta.pdf
+!web/public/samples/guia-visual-das-vitaminas.pdf
+!web/public/samples/mente-clinica-vol-01.pdf
+!web/public/samples/mente-clinica-vol-02.pdf
+!web/public/samples/minerais.pdf
+!web/public/samples/suplementacao-clinica.pdf
+**/[Dd]raft/
+**/[Dd]rafts/
+**/[Rr]ascunho/
+**/[Rr]ascunhos/
+**/*[Dd]raft*
+**/*[Rr]ascunho*

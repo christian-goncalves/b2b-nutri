@@ -1,0 +1,16 @@
+# Exclude PDFs by default; publish only the six authorized five-page samples.
+**/*.pdf
+!public/samples/da-escuta-a-conduta.pdf
+!public/samples/guia-visual-das-vitaminas.pdf
+!public/samples/mente-clinica-vol-01.pdf
+!public/samples/mente-clinica-vol-02.pdf
+!public/samples/minerais.pdf
+!public/samples/suplementacao-clinica.pdf
+
+# Editorial drafts are not part of a deployment.
+**/[Dd]raft/
+**/[Dd]rafts/
+**/[Rr]ascunho/
+**/[Rr]ascunhos/
+**/*[Dd]raft*
+**/*[Rr]ascunho*
