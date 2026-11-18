@@ -4,6 +4,7 @@ import { MobileMenu } from "./mobile-menu";
 const links = [
   { href: "/", label: "INÍCIO" },
   { href: "/ebooks", label: "E-BOOKS" },
+  { href: "/biblioteca", label: "BIBLIOTECA" },
   { href: "/#sobre", label: "SOBRE A AUTORA" },
   { href: "/#contato", label: "CONTATO" },
 ];

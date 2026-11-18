@@ -5,6 +5,13 @@ import { HomeHeroSlider } from "@/components/home-hero-slider";
 import { SectionHeading } from "@/components/section-heading";
 import { featuredHomeBooks, homeBooks, sliderBooks } from "@/data/home-books";
 import { homeTestimonials } from "@/data/home-testimonials";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Materiais de nutrição para prática clínica",
+  description: "E-books e conteúdos de nutrição organizados por tema para apoiar a prática clínica.",
+  path: "/",
+});
 
 export default function HomePage() {
   const localTest = process.env.NODE_ENV === "development" && process.env.FORMS_LOCAL_TEST === "true";

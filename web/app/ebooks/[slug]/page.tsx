@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 import { BookCard } from "@/components/book-card";
 import { ebooks } from "@/data/home-books";
+import { createPageMetadata } from "@/lib/seo";
 import { getAuthorizedSamplePath } from "@/lib/sample-pdf";
 import type { HomeBook } from "@/types/home-book";
 
@@ -20,19 +20,22 @@ async function getEbook(params: Promise<{ slug: string }>) {
 
 type EbookPageProps = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: EbookPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: EbookPageProps) {
   const ebook = await getEbook(params);
-  if (!ebook) return { title: "E-book não encontrado" };
+  if (!ebook) {
+    return createPageMetadata({
+      title: "E-book não encontrado",
+      description: "O material solicitado não está disponível no catálogo.",
+      path: "/ebooks/nao-encontrado",
+      indexable: false,
+    });
+  }
 
-  return {
+  return createPageMetadata({
     title: ebook.seo.title,
     description: ebook.seo.description,
-    openGraph: {
-      title: `${ebook.seo.title} | B2B Nutris`,
-      description: ebook.seo.description,
-      type: "website",
-    },
-  };
+    path: `/ebooks/${ebook.slug}`,
+  });
 }
 
 function getRelatedBooks(ebook: HomeBook) {
