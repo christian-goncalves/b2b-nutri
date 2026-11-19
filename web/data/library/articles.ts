@@ -1,13 +1,13 @@
 import type { ScientificArticle } from "@/types/scientific-article";
 import { ebooks } from "@/data/home-books";
-import VitaminB1Article from "../../../editorial/artigos-criados/2026-11-18-vitamina-b1-sinais-de-deficiencia-e-como-investigar-fatores-de-risco-nutricional.md";
-import FoodComplaintInvestigationArticle from "../../../editorial/artigos-criados/2026-11-19-como-transformar-a-queixa-alimentar-do-paciente-em-perguntas-de-investigacao-clinica.md";
-
+import VitaminB1Article from "../../../editorial/publicados/micronutrientes/2026-11-18-vitamina-b1-sinais-de-deficiencia-e-como-investigar-fatores-de-risco-nutricional.md";
+import FoodComplaintInvestigationArticle from "../../../editorial/publicados/comportamento-alimentar/2026-11-19-como-transformar-a-queixa-alimentar-do-paciente-em-perguntas-de-investigacao-clinica.md";
+import CreatineArticle from "../../../editorial/publicados/suplementacao/2026-11-19-creatina-quando-considerar-a-suplementacao-e-quais-cuidados-avaliar-na-pratica-nutricional.md";
 import PostEatingConsequencesArticle from "../../../editorial/publicados/comportamento-alimentar/2026-11-19-o-que-acontece-depois-de-comer-como-investigar-consequencias-sem-presumir-causas.md";
 import SerumMagnesiumArticle from "../../../editorial/publicados/micronutrientes/2026-11-19-magnesio-serico-normal-exclui-deficiencia.md";
 import PrioritizingNutritionCareArticle from "../../../editorial/publicados/pratica-clinica/2026-11-19-como-priorizar-a-conduta-nutricional-quando-ha-varias-necessidades.md";
 import PreAppointmentResponsesArticle from "../../../editorial/publicados/pratica-clinica/2026-11-19-como-usar-respostas-de-pre-atendimento-para-preparar-a-consulta-nutricional.md";
-import CreatineArticle from "../../../editorial/publicados/suplementacao/2026-11-19-creatina-quando-considerar-a-suplementacao-e-quais-cuidados-avaliar-na-pratica-nutricional.md";
+
 // Only manually reviewed articles belong here. MDX files for draft or test use stay outside this registry.
 const approvedArticles: ScientificArticle[] = [
   {
@@ -37,7 +37,7 @@ const approvedArticles: ScientificArticle[] = [
       },
     ],
     version: "1",
-    reviewedAt: "2026-11-18",
+    reviewedAt: "2026-11-19",
     publishedAt: "2026-11-18",
     updatedAt: "2026-11-18",
     editorialStatus: "approved",
@@ -47,7 +47,7 @@ const approvedArticles: ScientificArticle[] = [
     id: "como-transformar-queixa-alimentar-em-perguntas-investigacao-clinica",
     slug: "como-transformar-queixa-alimentar-em-perguntas-investigacao-clinica",
     title: "Como transformar a queixa alimentar do paciente em perguntas de investigação clínica",
-    summary: "Uma queixa alimentar abre uma linha de investigação. Perguntas abertas sobre rotina, padrões, fatores associados e dificuldades ajudam o nutricionista a construir hipóteses e definir uma conduta adequada ao contexto.",
+    summary: "A queixa alimentar é um ponto de partida, não uma conclusão. Perguntas abertas sobre rotina, padrões, fatores associados e dificuldades ajudam o nutricionista a compreender o contexto, levantar hipóteses e combinar próximos passos possíveis para aquele paciente.",
     primaryCategory: "comportamento-alimentar",
     tags: ["Comportamento alimentar", "Queixa alimentar", "Investigação clínica", "Raciocínio clínico"],
     primaryProductSlug: "o-olhar-comportamental-na-consulta-nutricional",
@@ -65,6 +65,46 @@ const approvedArticles: ScientificArticle[] = [
     updatedAt: "2026-11-19",
     editorialStatus: "approved",
     content: FoodComplaintInvestigationArticle,
+  },
+  {
+    id: "creatina-quando-considerar-suplementacao",
+    slug: "creatina-quando-considerar-suplementacao",
+    title: "Creatina: quando considerar a suplementação e quais cuidados avaliar na prática nutricional",
+    summary: "A creatina pode ser considerada quando há objetivos relacionados à força, à potência ou às adaptações ao treinamento resistido. A decisão clínica deve relacionar objetivo, alimentação, exercício, histórico de saúde e exames, com atenção especial à função renal e a grupos para os quais as evidências seguem limitadas.",
+    seoTitle: "Creatina: quando considerar a suplementação e quais cuidados avaliar na prática nutricional",
+    seoDescription: "A creatina pode ser considerada para objetivos de força, potência e treinamento resistido. Veja quais fatores clínicos, renais e de acompanhamento avaliar.",
+    primaryCategory: "suplementacao",
+    tags: ["Creatina", "Suplementação", "Treinamento resistido", "Função renal"],
+    primaryProductSlug: "guia-pratico-de-suplementacao-na-pratica-clinica",
+    relatedProductSlugs: [],
+    editorialAuthor: "B2B Nutris",
+    scientificReferences: [
+      {
+        title: "Suplementos, seção Creatina",
+        citation: "B2B Nutris. Suplementos, seção Creatina. E-book em PDF, páginas 3-4. Arquivo: ebooks/06 - SuplementaoB2Bnutris.pdf.",
+      },
+      {
+        title: "International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine",
+        citation: "Kreider RB, et al. International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine. Journal of the International Society of Sports Nutrition. 2017;14:18. DOI: 10.1186/s12970-017-0173-z.",
+        url: "https://doi.org/10.1186/s12970-017-0173-z",
+      },
+      {
+        title: "Creatine monohydrate supplementation for older adults and clinical populations",
+        citation: "Candow DG, et al. Creatine monohydrate supplementation for older adults and clinical populations. Journal of the International Society of Sports Nutrition. 2025;22(sup1):2534130. DOI: 10.1080/15502783.2025.2534130.",
+        url: "https://doi.org/10.1080/15502783.2025.2534130",
+      },
+      {
+        title: "Impact of creatine supplementation on kidney health: a systematic review and meta-analysis",
+        citation: "Almeida AS, et al. Impact of creatine supplementation on kidney health: a systematic review and meta-analysis. International Urology and Nephrology. 2026;58:5423-5434. DOI: 10.1007/s11255-026-05287-x.",
+        url: "https://doi.org/10.1007/s11255-026-05287-x",
+      },
+    ],
+    version: "1",
+    reviewedAt: "2026-11-19",
+    publishedAt: "2026-11-19",
+    updatedAt: "2026-11-19",
+    editorialStatus: "approved",
+    content: CreatineArticle,
   },
   {
     id: "investigar-o-que-acontece-depois-de-comer",
@@ -167,46 +207,6 @@ const approvedArticles: ScientificArticle[] = [
     updatedAt: "2026-11-19",
     editorialStatus: "approved",
     content: PreAppointmentResponsesArticle,
-  },
-  {
-    id: "creatina-quando-considerar-suplementacao",
-    slug: "creatina-quando-considerar-suplementacao",
-    title: "Creatina: quando considerar a suplementação e quais cuidados avaliar na prática nutricional",
-    summary: "A creatina pode ser considerada quando há objetivos relacionados à força, à potência ou às adaptações ao treinamento resistido. A decisão clínica deve relacionar objetivo, alimentação, exercício, histórico de saúde e exames, com atenção especial à função renal e a grupos para os quais as evidências seguem limitadas.",
-    seoTitle: "Creatina: quando considerar a suplementação e quais cuidados avaliar na prática nutricional",
-    seoDescription: "A creatina pode ser considerada para objetivos de força, potência e treinamento resistido. Veja quais fatores clínicos, renais e de acompanhamento avaliar.",
-    primaryCategory: "suplementacao",
-    tags: ["Creatina", "Suplementação", "Treinamento resistido", "Função renal"],
-    primaryProductSlug: "guia-pratico-de-suplementacao-na-pratica-clinica",
-    relatedProductSlugs: [],
-    editorialAuthor: "B2B Nutris",
-    scientificReferences: [
-      {
-        title: "Suplementos, seção Creatina",
-        citation: "B2B Nutris. Suplementos, seção Creatina. E-book em PDF, páginas 3-4. Arquivo: ebooks/06 - SuplementaoB2Bnutris.pdf.",
-      },
-      {
-        title: "International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine",
-        citation: "Kreider RB, et al. International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine. Journal of the International Society of Sports Nutrition. 2017;14:18. DOI: 10.1186/s12970-017-0173-z.",
-        url: "https://doi.org/10.1186/s12970-017-0173-z",
-      },
-      {
-        title: "Creatine monohydrate supplementation for older adults and clinical populations",
-        citation: "Candow DG, et al. Creatine monohydrate supplementation for older adults and clinical populations. Journal of the International Society of Sports Nutrition. 2025;22(sup1):2534130. DOI: 10.1080/15502783.2025.2534130.",
-        url: "https://doi.org/10.1080/15502783.2025.2534130",
-      },
-      {
-        title: "Impact of creatine supplementation on kidney health: a systematic review and meta-analysis",
-        citation: "Almeida AS, et al. Impact of creatine supplementation on kidney health: a systematic review and meta-analysis. International Urology and Nephrology. 2026;58:5423-5434. DOI: 10.1007/s11255-026-05287-x.",
-        url: "https://doi.org/10.1007/s11255-026-05287-x",
-      },
-    ],
-    version: "1",
-    reviewedAt: "2026-11-19",
-    publishedAt: "2026-11-19",
-    updatedAt: "2026-11-19",
-    editorialStatus: "approved",
-    content: CreatineArticle,
   },
 ];
 

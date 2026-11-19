@@ -369,8 +369,7 @@ summary:focus-visible {
 .scientific-article__body td { padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); text-align: left; }
 .scientific-article__body th { background: var(--color-table-note); }
 
-.scientific-article__references,
-.scientific-article__version {
+.scientific-article__references {
   max-width: 72ch;
   margin: clamp(36px, 5vw, 56px) auto 0;
   padding-top: var(--space-6);
@@ -393,12 +392,19 @@ summary:focus-visible {
 
 .scientific-article__references a { overflow-wrap: anywhere; }
 
-.scientific-article__version {
-  color: var(--color-text-muted);
-  font-size: var(--text-small);
+/* Reduz apenas o espaço entre o fim do artigo e o e-book principal. */
+.library-page > .scientific-article {
+  padding-bottom: calc(clamp(48px, 6.5vw, 88px) / 2);
 }
 
-.scientific-article__version p + p { margin-top: var(--space-2); }
+.library-page > [aria-labelledby="primary-book-title"] {
+  padding-top: calc(clamp(48px, 6.5vw, 88px) / 2);
+}
+
+@media (max-width: 499px) {
+  .library-page > .scientific-article { padding-bottom: 23px; }
+  .library-page > [aria-labelledby="primary-book-title"] { padding-top: 23px; }
+}
 
 @media (max-width: 620px) {
   .library-category-grid,

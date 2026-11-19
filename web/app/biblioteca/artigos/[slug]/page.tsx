@@ -143,10 +143,6 @@ export default async function ScientificArticlePage({ params }: ArticlePageProps
           <div className="scientific-article__body">
             <Content components={articleBodyComponents} />
           </div>
-
-          <footer className="scientific-article__version">
-            <p>Versão do conteúdo: {article.version}</p>
-          </footer>
         </div>
       </article>
 
