@@ -214,7 +214,8 @@ summary:focus-visible {
   text-decoration: none;
 }
 
-.library-article-card .card__action a {
+.library-article-card .card__action a,
+.library-article-card .card__action span {
   color: var(--color-primary);
   font-weight: var(--weight-semibold);
   text-decoration: none;

@@ -1,0 +1,138 @@
+# Auditoria técnica: SEO, AEO e biblioteca científica
+
+**Escopo:** inspeção somente de leitura do checkout local em `/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri`. Não alterei arquivos, não instalei dependências, não executei testes, migrações ou deploy, nem consultei valores de variáveis de ambiente. A auditoria descreve o repositório; não confirma o comportamento atual do site em produção.
+
+## A. Resumo executivo
+
+O site é uma aplicação **Next.js com App Router**, em TypeScript e React. A página inicial, o catálogo e as páginas de produto são componentes de servidor por padrão; as páginas individuais dos seis e-books têm geração estática configurada. Isso oferece uma base adequada para entregar conteúdo indexável em HTML sem depender exclusivamente de JavaScript.
+
+Há títulos e descrições globais e por página de catálogo e produto, além de Open Graph parcial. O repositório consultado não contém configuração de sitemap, `robots.txt`, canonical URLs, Schema.org ou ferramentas de analytics. Esses recursos devem ser considerados **não encontrados no checkout**, não prova de ausência no ambiente publicado.
+
+Os produtos estão cadastrados em um arquivo TypeScript local, com slugs, categorias, descrições, capas, campos de SEO e referências entre produtos. Isso permite relacionar artigos e e-books, mas ainda não há modelo nem rotas de artigos, workflow editorial ou armazenamento de conteúdo científico.
+
+Para o estágio atual, **arquivos locais Markdown/MDX** parecem a opção mais simples para a biblioteca, condicionada a definir previamente o fluxo de revisão e aprovação científica. CMS headless e painel próprio também são viáveis, mas exigem decisões de infraestrutura e governança que o repositório não sustenta como necessidade atual.
+
+## B. Inventário técnico
+
+| Área | Encontrado | Evidência e estado |
+|---|---|---|
+| Framework e versão | Next.js `16.4.6` | Confirmado no [package.json](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/package.json:14). |
+| Linguagem e tipos | TypeScript `5.9.x`; configuração estrita | Confirmado no [package.json](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/package.json:20) e [tsconfig.json](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/tsconfig.json:10). |
+| Interface | React `19.2.3`, React DOM `19.2.3` | Confirmado no [package.json](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/package.json:14). |
+| Build e execução | Scripts `next dev`, `next build`, `next start` | Confirmado no [package.json](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/package.json:5). |
+| Gerenciador de pacotes | npm, indicado pelo `package-lock.json` e comandos documentados | Confirmado nos arquivos e no [README](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/README.md:7). |
+| Estilização | CSS tradicional, com tokens e componentes próprios | `globals.css` importa [tokens e componentes](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/globals.css:1). |
+| Bibliotecas visuais | Não encontrei framework de componentes UI | No manifesto, as dependências declaradas são Next.js, React, Nodemailer e ferramentas de tipos/build. |
+| Dependências de servidor | Nodemailer | Instalado; o manifesto, isoladamente, não prova onde ou como é usado. |
+| Design system | `design-system/`, `web/styles/tokens.css` e `web/styles/components.css` | Há tokens visuais e CSS próprios, importados pela aplicação. O [README do Design System](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/design-system/README.md:1) descreve a base visual. |
+| Estado no cliente | Estado React local em componentes interativos | Categorias usam `useState` em [ebook-catalog.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/components/ebook-catalog.tsx:12); slider e leitor também mantêm estado local. Não encontrei Redux, Zustand ou outra store global. |
+| Dados dos e-books | Arquivo local `web/data/home-books.ts` e tipo `HomeBook` | Confirmado em [home-books.ts](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/data/home-books.ts:9) e [home-book.ts](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/types/home-book.ts:3). |
+| Organização | `web/app/` para rotas e APIs; `web/components/`, `web/data/`, `web/lib/`, `web/public/`, `web/styles/`, `web/types/` | Confirmado pela estrutura atual de arquivos. |
+
+Novas páginas devem ser integradas pelo App Router em `web/app/`; componentes reutilizáveis, em `web/components/`; dados locais e tipos, em `web/data/` e `web/types/`. Conteúdo e metadados de artigos ainda não têm estrutura definida no código.
+
+## C. Estado atual de SEO e AEO
+
+### Confirmado no código
+
+- **Idioma:** layout raiz declara `lang="pt-BR"` em [layout.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/layout.tsx:29).
+- **Metadados globais:** título padrão, template de título e descrição global em [layout.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/layout.tsx:15).
+- **Metadados do catálogo:** título, descrição e Open Graph básico em [ebooks/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/page.tsx:5).
+- **Metadados de produto:** título, descrição e Open Graph gerados a partir dos dados locais em [[slug]/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:23).
+- **HTML semântico:** páginas usam `main`, `section`, headings, listas, breadcrumbs e `article` para cards/depoimentos. Há headings `h1` nas páginas de catálogo e produto.
+- **Imagens:** capas usam `next/image`, `sizes` e textos alternativos no catálogo e nos produtos; o hero prioriza a imagem inicial. Evidências em [book-card.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/components/book-card.tsx:8), [produto](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:65) e [home-hero-slider.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/components/home-hero-slider.tsx:176).
+- **Links internos e conteúdos relacionados:** páginas de produto mostram breadcrumbs e materiais relacionados, derivados dos slugs locais em [[slug]/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:38).
+- **HTML rastreável:** páginas principais são componentes de servidor sem diretiva `"use client"`; interações específicas, como filtro e slider, são isoladas em componentes clientes. Isso indica que o conteúdo inicial pode ser renderizado pelo servidor, embora esta auditoria não tenha inspecionado o HTML de produção.
+- **Rotas de produto estáticas:** `generateStaticParams()` retorna os slugs cadastrados e `dynamicParams = false` em [[slug]/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:10).
+- **Página inexistente:** slug não encontrado chama `notFound()` na mesma rota, e slugs não gerados são desabilitados por `dynamicParams = false`.
+- **URLs amigáveis:** catálogo em `/ebooks`; detalhe em `/ebooks/[slug]`; amostra em `/ebooks/[slug]/amostra`.
+- **Categorias:** botões filtram o catálogo no cliente. A lista de categorias vem dos produtos cadastrados; não há rotas próprias de categoria em [home-books.ts](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/data/home-books.ts:140).
+
+### Não encontrado no checkout
+
+- `sitemap.xml`, `robots.txt`, sitemap/robots dinâmicos ou equivalente.
+- Canonical URLs e `metadataBase`.
+- Meta robots, regras `noindex`/`nofollow` ou controles para rastreadores de IA.
+- Dados estruturados Schema.org/JSON-LD.
+- Metadados Open Graph completos por página, como imagem dedicada e URLs canônicas; Twitter Cards também não foram encontrados.
+- Páginas próprias e indexáveis para categorias.
+- Busca textual no catálogo.
+- Integração de código com Google Search Console, Analytics ou Tag Manager.
+- Regras explícitas de redirecionamento ou reescrita no `next.config.ts`; a configuração atual está vazia em [next.config.ts](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/next.config.ts:1).
+
+### Implicações para AEO
+
+O conteúdo renderizado no servidor e os campos de descrição existentes são uma base favorável para descoberta e extração de conteúdo. Não encontrei recursos específicos para crawlers de IA. Também não há, no site atual, estrutura de autoria profissional pública, revisão científica, referências por artigo, datas de publicação/revisão ou FAQs. Esses elementos dependerão do modelo editorial e dos dados que forem aprovados. `llms.txt` não aparece no repositório e não deve ser tratado como requisito obrigatório.
+
+## D. Arquitetura da biblioteca
+
+Os caminhos sugeridos são compatíveis com o App Router: uma rota de índice, rotas de assunto e uma rota dinâmica de artigo poderiam compartilhar layout e componentes. Os e-books já têm categorias e `relatedSlugs`, o que oferece um ponto de partida para relacionar artigos a produtos. Essa relação ainda não existe no modelo.
+
+Para que filtros, categorias e artigos sejam indexáveis, o conteúdo e os links essenciais devem estar presentes no HTML de servidor. O filtro atual de categorias funciona no cliente e não cria URLs de categoria; para uma biblioteca com páginas temáticas, as categorias devem ter rotas próprias ou outra representação estável.
+
+As datas, metadados individuais, referências, autoria e revisão precisam fazer parte do modelo de artigo. O sitemap, quando introduzido, também precisará refletir os artigos publicados e excluir rascunhos.
+
+## E. Comparação de soluções de publicação
+
+| Opção | Compatibilidade | Complexidade e manutenção | SEO e indexação |
+|---|---|---|---|
+| **A. Markdown/MDX ou arquivos locais** | Alta: se encaixa nos dados locais e no App Router existente. | Baixa a média; edição exige Git e processo editorial fora de um painel. Versionamento de conteúdo pode acompanhar o código. | Boa se renderizado no servidor com metadados e rotas estáticas; dezenas ou centenas de artigos são viáveis com convenções consistentes. |
+| **B. CMS headless** | Compatível, mas não há integração atual identificada. | Média; adiciona serviço, modelo, permissões, preview, webhooks e monitoramento de publicação. Menos dependência do desenvolvedor para editar conteúdo, conforme o CMS escolhido. | Boa se houver renderização de servidor/estática, revalidação e controle de publicação; requer configurar corretamente preview e atualização do sitemap. |
+| **C. Banco de dados e painel próprio** | Tecnicamente possível, mas não encontrei banco de dados, ORM ou autenticação de conteúdo existente. | Alta; exige construir autenticação, autorização, workflow, editor, histórico/versões, armazenamento e operação. | Boa se implementada com renderização de servidor e metadados consistentes; aumenta a superfície de manutenção e segurança. |
+
+## F. Riscos e limitações encontrados
+
+1. **Sem infraestrutura SEO descoberta no repositório:** sitemap, robots, canonical e schema não foram encontrados. Não é possível inferir se o provedor acrescenta alguma regra fora do checkout.
+2. **Produtos ainda sem URLs Hotmart:** os seis registros têm `hotmartUrl: null`; a página exibe o estado pendente em vez de link de compra. Ver [home-books.ts](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/data/home-books.ts:25) e [[slug]/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:90).
+3. **Autoria profissional ainda não disponível na página pública:** a home informa que a biografia oficial será adicionada quando fornecida em [page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/page.tsx:41).
+4. **Páginas institucionais são placeholders:** Privacidade e Termos aguardam revisão e aprovação em [privacidade/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/privacidade/page.tsx:6) e [termos/page.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/termos/page.tsx:6).
+5. **Dependência do cliente em algumas interações:** o filtro de categorias não oferece URL própria, e o leitor de amostra exibe páginas como imagens WebP através de um componente cliente em [sample-reader.tsx](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/components/sample-reader.tsx:1).
+6. **Infraestrutura externa não verificável pelo repositório:** Vercel, domínio, CDN, cache efetivo, headers de produção, redirecionamentos operacionais e dados do Search Console não foram verificados nesta auditoria.
+7. **Documentação e estado atual requerem leitura conjunta:** o README lista pendências de formulários, enquanto decisões e implementação mais recentes podem divergir. Não use a seção operacional do README como única evidência de estado; os próprios documentos distinguem relatos de produção de validação direta.
+
+**Não foi possível verificar:** pontuações de Lighthouse/Core Web Vitals, comportamento efetivo de crawlers, HTML servido em produção, configuração atual do domínio e do provedor, analytics ativos fora do código e dados do Search Console. Não foram inferidas métricas de performance.
+
+## G. Recomendação técnica preliminar
+
+Começar com **artigos em arquivos locais Markdown/MDX**, com um esquema explícito para slug, título, resumo, assunto, autoria, profissional revisora, status, datas, referências, versão e produtos relacionados. Publicar somente itens no estado aprovado/publicado e renderizar cada artigo no servidor com metadados próprios.
+
+Essa opção reutiliza a arquitetura atual sem introduzir banco, CMS ou dependências de infraestrutura. Para dezenas ou centenas de artigos, convém estabelecer validação do esquema, convenções de URL, sitemap gerado a partir dos publicados e fluxo editorial antes de escalar. Se a edição via Git se tornar um gargalo, reavaliar CMS headless; o painel próprio não parece justificado pelo que foi encontrado.
+
+## H. Próximas decisões
+
+Antes de implementar, decidir:
+
+1. Modelo de conteúdo: Markdown/MDX local ou serviço editorial externo.
+2. Estrutura final de URLs para índice, categorias e artigos.
+3. Campos obrigatórios e formato de referências bibliográficas.
+4. Como registrar autora, revisora nutricionista, credenciais públicas e datas.
+5. Como representar estados de rascunho, revisão solicitada, aprovado e publicado, incluindo quem pode alterar cada estado.
+6. Se o histórico de versões ficará no Git ou também será mantido no CMS.
+7. Como associar artigos a assuntos e e-books, e como selecionar artigos relacionados.
+8. Política de publicação: quem dá a aprovação final, como lidar com atualização científica e como retirar conteúdo.
+9. Metadados padrão, imagens sociais, canonical, sitemap e regras de robots/noindex.
+10. Como busca e filtros devem funcionar e se precisam de URLs indexáveis.
+11. Quais serviços de mensuração serão usados e quem terá acesso.
+12. Quando cadastrar e validar os links individuais da Hotmart.
+
+## I. Evidências
+
+Arquivos principais consultados:
+
+- [Manifesto de dependências](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/package.json:1)
+- [Layout global e metadados](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/layout.tsx:15)
+- [Página inicial](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/page.tsx:9)
+- [Catálogo e metadados](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/page.tsx:5)
+- [Detalhe de produto, rotas estáticas e metadados](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/app/ebooks/%5Bslug%5D/page.tsx:10)
+- [Modelo local de e-books](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/data/home-books.ts:9)
+- [Tipo de produto](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/types/home-book.ts:3)
+- [Configuração Next.js](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/next.config.ts:1)
+- [Configuração Vercel local](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/vercel.json:1)
+- [Tokens CSS](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/styles/tokens.css:1)
+- [CSS de componentes](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/web/styles/components.css:1)
+- [Design System](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/design-system/README.md:1)
+- [README operacional](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/README.md:15)
+- [Roteiro e checkpoints](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/docs/roteiro.md:365)
+- [Decisões de implementação](/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/docs/decisoes-implementacao.md:1)
+
+O estado Git observado antes da auditoria já continha alterações em `INBOX.md`, `docs/roteiro.md` e uma pasta não rastreada `ebooks/`. Preservei todos esses arquivos. Nenhum teste foi executado, conforme o escopo somente de leitura.

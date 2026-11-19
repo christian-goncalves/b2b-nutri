@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Children, isValidElement, type ComponentProps, type ReactNode } from "react";
 import { BookCard } from "@/components/book-card";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { StructuredData } from "@/components/structured-data";
@@ -10,6 +11,22 @@ import { absoluteSiteUrl, createPageMetadata } from "@/lib/seo";
 import type { ScientificArticle } from "@/types/scientific-article";
 
 type ArticlePageProps = { params: Promise<{ slug: string }> };
+
+function getTextContent(node: ReactNode): string {
+  return Children.toArray(node).map((child) => {
+    if (typeof child === "string" || typeof child === "number") return String(child);
+    if (isValidElement<{ children?: ReactNode }>(child)) return getTextContent(child.props.children);
+    return "";
+  }).join("");
+}
+
+const articleBodyComponents = {
+  h1: () => null,
+  p: ({ children, ...props }: ComponentProps<"p">) => {
+    if (getTextContent(children).trim().startsWith("Resumo:")) return null;
+    return <p {...props}>{children}</p>;
+  },
+};
 
 export const dynamicParams = false;
 
@@ -117,7 +134,6 @@ export default async function ScientificArticlePage({ params }: ArticlePageProps
                 </div>
               )}
               <div><dt>Publicado em</dt><dd><time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time></dd></div>
-              <div><dt>Atualizado em</dt><dd><time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time></dd></div>
             </dl>
             <ul className="scientific-article__tags" aria-label="Temas do artigo">
               {article.tags.map((tag) => <li key={tag}>{tag}</li>)}
@@ -125,25 +141,11 @@ export default async function ScientificArticlePage({ params }: ArticlePageProps
           </header>
 
           <div className="scientific-article__body">
-            <Content />
+            <Content components={articleBodyComponents} />
           </div>
-
-          <section className="scientific-article__references" aria-labelledby="article-references-title">
-            <h2 id="article-references-title">Referências científicas</h2>
-            <ol>
-              {article.scientificReferences.map((reference) => (
-                <li key={`${reference.title}-${reference.citation}`}>
-                  {reference.url ? (
-                    <a href={reference.url} target="_blank" rel="noreferrer">{reference.citation}</a>
-                  ) : reference.citation}
-                </li>
-              ))}
-            </ol>
-          </section>
 
           <footer className="scientific-article__version">
             <p>Versão do conteúdo: {article.version}</p>
-            <p>Revisão registrada em <time dateTime={article.reviewedAt}>{formatDate(article.reviewedAt)}</time>.</p>
           </footer>
         </div>
       </article>

@@ -41,6 +41,10 @@ export default async function LibraryCategoryPage({ params }: CategoryPageProps)
   if (!category) notFound();
 
   const articles = getArticlesForCategory(category.slug);
+  const showMicronutrientDemonstration =
+    process.env.NODE_ENV === "development" &&
+    category.slug === "micronutrientes" &&
+    articles.length === 0;
   const relatedBooks = category.relatedProductSlugs
     .map((bookSlug) => ebooks.find((book) => book.slug === bookSlug))
     .filter((book) => Boolean(book));
@@ -68,6 +72,19 @@ export default async function LibraryCategoryPage({ params }: CategoryPageProps)
             {articles.length > 0 ? (
               <div className="library-article-grid">
                 {articles.map((article) => <LibraryArticleCard key={article.id} article={article} />)}
+              </div>
+            ) : showMicronutrientDemonstration ? (
+              <div className="library-article-grid">
+                {[0, 1, 2].map((copy) => (
+                  <LibraryArticleCard
+                    key={`micronutrientes-demonstration-${copy}`}
+                    demonstration={{
+                      title: "Ferritina e ferro: interpretação na prática clínica",
+                      summary: "Entenda como avaliar os resultados de ferritina considerando os estoques de ferro, a inflamação e o contexto clínico.",
+                      categorySlug: "micronutrientes",
+                    }}
+                  />
+                ))}
               </div>
             ) : (
               <p className="empty-state">
