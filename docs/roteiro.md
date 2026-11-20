@@ -381,7 +381,6 @@ Caso faltem credenciais, implementar a estrutura testável com adaptadores simul
 **CP-06: Qualidade e publicação**
 
 Entregas:
-- Revisão de acessibilidade.
 - SEO.
 - Testes automatizados.
 - Testes responsivos.
@@ -393,6 +392,8 @@ Entregas:
 Não realizar publicação efetiva sem autorização explícita.
 
 **Autorização registrada em 2026-11-16:** o responsável autorizou o deploy inicial do CP-06 antes dos testes de produção de rate limit no Redis e de contato com deduplicação. Esta autorização permite a publicação inicial e os testes descritos pelo responsável; não registra seus resultados nem encerra os critérios restantes do checkpoint.
+
+**Testes de produção registrados em 2026-11-16:** seis envios inválidos consecutivos ao endpoint de contato retornaram `400` nas cinco primeiras tentativas e `429` na sexta. Em seguida, um contato sintético retornou `200`, e a repetição com a mesma chave de idempotência retornou `409`; a busca pelo registro de teste na aba `Contato` encontrou uma única linha. O responsável confirmou o recebimento do e-mail de teste. Esta etapa de rate limit e idempotência de contato está concluída; os demais critérios do CP-06 permanecem em aberto.
 
 ### 13. Protocolo obrigatório de checkpoints
 

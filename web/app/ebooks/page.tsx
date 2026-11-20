@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
 import { EbookCatalog } from "@/components/ebook-catalog";
 import { ebookCategories, ebooks } from "@/data/home-books";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "E-books",
   description: "Explore os materiais digitais da biblioteca B2B Nutris.",
-  openGraph: {
-    title: "E-books | B2B Nutris",
-    description: "Explore os materiais digitais da biblioteca B2B Nutris.",
-  },
-};
+  path: "/ebooks",
+});
 
 export default function EbooksPage() {
   return (

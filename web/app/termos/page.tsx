@@ -1,7 +1,12 @@
-import type { Metadata } from "next";
 import { InstitutionalPlaceholder } from "@/components/institutional-placeholder";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Termos de uso" };
+export const metadata = createPageMetadata({
+  title: "Termos de uso",
+  description: "Termos de uso da B2B Nutris. O texto final aguarda aprovação.",
+  path: "/termos",
+  indexable: false,
+});
 
 export default function TermsPage() {
   return (
