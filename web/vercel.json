@@ -1,8 +1,33 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
     {
       "path": "/api/jobs/anonymize-resolved-contacts",
       "schedule": "0 6 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "b2b-nutris-christian-goncalves-projects\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://b2bnutris.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "b2b-nutris-git-main-christian-goncalves-projects\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://b2bnutris.com/:path*",
+      "permanent": true
     }
   ]
 }
