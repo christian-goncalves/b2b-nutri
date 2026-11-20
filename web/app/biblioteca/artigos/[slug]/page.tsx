@@ -48,6 +48,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
   return createPageMetadata({
     title: article.seoTitle ?? article.title,
+    absoluteTitle: article.seoTitleIsAbsolute,
     description: article.seoDescription ?? article.summary,
     path: `/biblioteca/artigos/${article.slug}`,
     openGraphType: "article",

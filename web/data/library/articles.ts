@@ -7,6 +7,7 @@ import PostEatingConsequencesArticle from "../../../editorial/publicados/comport
 import SerumMagnesiumArticle from "../../../editorial/publicados/micronutrientes/2026-11-19-magnesio-serico-normal-exclui-deficiencia.md";
 import PrioritizingNutritionCareArticle from "../../../editorial/publicados/pratica-clinica/2026-11-19-como-priorizar-a-conduta-nutricional-quando-ha-varias-necessidades.md";
 import PreAppointmentResponsesArticle from "../../../editorial/publicados/pratica-clinica/2026-11-19-como-usar-respostas-de-pre-atendimento-para-preparar-a-consulta-nutricional.md";
+import ProbioticsPrebioticsArticle from "../../../editorial/publicados/suplementacao/2026-11-20-probioticos-e-prebioticos-avaliacao-na-pratica-nutricional.md";
 
 // Only manually reviewed articles belong here. MDX files for draft or test use stay outside this registry.
 const approvedArticles: ScientificArticle[] = [
@@ -48,6 +49,9 @@ const approvedArticles: ScientificArticle[] = [
     slug: "como-transformar-queixa-alimentar-em-perguntas-investigacao-clinica",
     title: "Como transformar a queixa alimentar do paciente em perguntas de investigação clínica",
     summary: "A queixa alimentar é um ponto de partida, não uma conclusão. Perguntas abertas sobre rotina, padrões, fatores associados e dificuldades ajudam o nutricionista a compreender o contexto, levantar hipóteses e combinar próximos passos possíveis para aquele paciente.",
+    seoTitle: "Queixa alimentar: perguntas para investigar na consulta",
+    seoDescription: "Veja como investigar uma queixa alimentar com perguntas abertas sobre rotina, contexto, padrões e próximos passos possíveis.",
+    seoTitleIsAbsolute: true,
     primaryCategory: "comportamento-alimentar",
     tags: ["Comportamento alimentar", "Queixa alimentar", "Investigação clínica", "Raciocínio clínico"],
     primaryProductSlug: "o-olhar-comportamental-na-consulta-nutricional",
@@ -167,6 +171,9 @@ const approvedArticles: ScientificArticle[] = [
     slug: "como-priorizar-a-conduta-nutricional-quando-ha-varias-necessidades",
     title: "Como priorizar a conduta nutricional quando há várias necessidades",
     summary: "Quando a avaliação revela várias necessidades, escolha o primeiro foco considerando risco clínico, relevância para a saúde, prioridades do paciente e viabilidade da intervenção. Situações que exigem atendimento ou encaminhamento têm precedência; nos demais casos, a prioridade pode ser construída em conjunto e reavaliada ao longo do acompanhamento.",
+    seoTitle: "Como priorizar várias necessidades na conduta nutricional",
+    seoDescription: "Veja como priorizar necessidades nutricionais considerando risco clínico, prioridades do paciente e viabilidade da conduta.",
+    seoTitleIsAbsolute: true,
     primaryCategory: "pratica-clinica",
     tags: ["Conduta nutricional", "Priorização clínica", "Avaliação nutricional", "Planejamento"],
     primaryProductSlug: "da-escuta-a-conduta",
@@ -207,6 +214,42 @@ const approvedArticles: ScientificArticle[] = [
     updatedAt: "2026-11-19",
     editorialStatus: "approved",
     content: PreAppointmentResponsesArticle,
+  },
+  {
+    id: "probioticos-e-prebioticos-como-avaliar-o-uso-na-pratica-nutricional",
+    slug: "probioticos-e-prebioticos-como-avaliar-o-uso-na-pratica-nutricional",
+    title: "Probióticos e prebióticos: avaliação na prática nutricional",
+    summary: "Probióticos e prebióticos não são intercambiáveis, e seus efeitos dependem da cepa ou do composto, da indicação e da tolerância. A avaliação deve relacionar objetivo clínico, contexto alimentar, segurança e resposta individual.",
+    seoTitle: "Probióticos e prebióticos: uso na prática nutricional",
+    seoDescription: "Veja como avaliar probióticos e prebióticos conforme objetivo clínico, evidências, segurança, tolerância e resposta individual na prática nutricional.",
+    seoTitleIsAbsolute: true,
+    primaryCategory: "suplementacao",
+    tags: ["Probióticos", "Prebióticos", "Suplementação", "Microbiota intestinal"],
+    primaryProductSlug: "guia-pratico-de-suplementacao-na-pratica-clinica",
+    relatedProductSlugs: [],
+    editorialAuthor: "B2B Nutris",
+    scientificReferences: [
+      {
+        title: "Suplementos, seções Probióticos e Prebióticos",
+        citation: "B2B Nutris. Suplementos, seções “Probióticos” e “Prebióticos”. E-book em PDF, páginas 23–26. Arquivo: ebooks/06 - SuplementaoB2Bnutris.pdf.",
+      },
+      {
+        title: "Probiotics and prebiotics: WGO Global Guideline",
+        citation: "World Gastroenterology Organisation. Probiotics and prebiotics: WGO Global Guideline. 2023.",
+        url: "https://www.worldgastroenterology.org/UserFiles/file/guidelines/probiotics-and-prebiotics-english-2023.pdf",
+      },
+      {
+        title: "AGA Clinical Practice Guidelines on the Role of Probiotics in the Management of Gastrointestinal Disorders",
+        citation: "Su GL, Ko CW, Bercik P, et al. AGA Clinical Practice Guidelines on the Role of Probiotics in the Management of Gastrointestinal Disorders. 2020.",
+        url: "https://gastro.org/clinical-guidance/role-of-probiotics-in-the-management-of-gastrointestinal-disorders/",
+      },
+    ],
+    version: "1",
+    reviewedAt: "2026-11-20",
+    publishedAt: "2026-11-20",
+    updatedAt: "2026-11-20",
+    editorialStatus: "approved",
+    content: ProbioticsPrebioticsArticle,
   },
 ];
 

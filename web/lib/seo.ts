@@ -21,6 +21,7 @@ export function absoluteSiteUrl(path: string) {
 
 type PageMetadataInput = {
   title: string;
+  absoluteTitle?: boolean;
   description: string;
   path: string;
   indexable?: boolean;
@@ -32,6 +33,7 @@ type PageMetadataInput = {
 
 export function createPageMetadata({
   title,
+  absoluteTitle = false,
   description,
   path,
   indexable = true,
@@ -45,7 +47,7 @@ export function createPageMetadata({
   const shouldIndex = indexable && productionEnvironment;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
     robots: { index: shouldIndex, follow: productionEnvironment },

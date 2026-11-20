@@ -1,6 +1,6 @@
 ---
 name: b2b-publicar-artigo
-description: "Busca artigos em editorial/pendentes/<categoria>/, integra um artigo aprovado à biblioteca B2B Nutris, valida a página e o card, e move o Markdown para editorial/publicados/<categoria>/."
+description: "Busca artigos pendentes por categoria, integra um artigo aprovado à biblioteca B2B Nutris, valida a página e o card, e move o Markdown para editorial/publicados."
 ---
 
 # B2B Nutris | Publicação de artigo na biblioteca
@@ -41,7 +41,11 @@ Consulte a documentação local do Next.js instalado antes de modificar código 
 Preserve os metadados existentes e siga o tipo e o validador atuais. Não invente dados pessoais ou científicos.
 
 - Extraia do Markdown título, resumo e referências. Gere `id` e slug pelas convenções atuais, usando como slug o nome do arquivo e preservando URLs estáveis em atualizações.
-- Gere tags relevantes a partir do conteúdo, sem repetição artificial de palavras-chave. Derive `seoTitle` e `seoDescription` do título e resumo quando forem úteis; os dois campos são opcionais no tipo.
+- Gere tags relevantes a partir do conteúdo, sem repetição artificial de palavras-chave.
+- Para todo artigo novo, preencha `seoTitle` e `seoDescription` explicitamente em `web/data/library/articles.ts`; não dependa de `title` ou `summary` como fallback. `title` é o H1 visível e `summary` é o resumo editorial visível. Mantenha-os separados dos metadados SEO.
+- Escreva `seoTitle` claro e fiel ao artigo, em torno de 50-60 caracteres contando espaços e pontuação. Não acrescente `| B2B Nutris` quando o template global já inclui a marca. Confirme a saída final do `<title>` após o template; use `seoTitleIsAbsolute: true` quando for necessário evitar o sufixo automático, se o tipo e a rota atuais oferecerem esse campo. Não encurte nem reescreva o H1 para corrigir apenas o metadado SEO.
+- Escreva `seoDescription` específica, em torno de 70-160 caracteres, resumindo o conteúdo e podendo incluir um convite curto, como “Veja como...”. Conte os caracteres incluindo espaços e pontuação. Não copie um resumo editorial longo nem acrescente essa meta description ao corpo visível do artigo.
+- Em uma correção apenas de metadados, mantenha o H1, o resumo visível e o corpo do artigo. Confira no HTML local os valores finais de `<title>` e `<meta name="description">` e confirme que o conteúdo visível continua intacto.
 - Use `editorialAuthor: "B2B Nutris"` e `editorialStatus: "approved"` para o artigo vindo de `editorial/pendentes/<categoria>/`, que é a fila de artigos finalizados para publicação.
 - No primeiro cadastro, use versão `"1"`; defina `reviewedAt` como a data local atual de aprovação, e `publishedAt` e `updatedAt` como a data em que a página entrar na biblioteca da aplicação. Datas devem usar `YYYY-MM-DD`.
 - Em atualização, preserve `publishedAt` e a versão se houver apenas ajuste técnico, formatação ou correção sem efeito científico. Em mudança de conteúdo científico, incremente a versão inteira em uma unidade, atualize `reviewedAt` e `updatedAt` para a data local atual. Atualize `updatedAt` quando mudar conteúdo público ou metadados públicos.
