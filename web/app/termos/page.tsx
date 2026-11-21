@@ -3,7 +3,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Termos de uso",
-  description: "Termos de uso da B2B Nutris. O texto final aguarda aprovação.",
+  description: "Consulte os termos de uso da B2B Nutris; o texto desta página aguarda revisão e aprovação do responsável.",
   path: "/termos",
   indexable: false,
 });

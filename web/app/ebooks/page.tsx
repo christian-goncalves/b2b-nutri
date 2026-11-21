@@ -4,7 +4,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "E-books",
-  description: "Explore os materiais digitais da biblioteca B2B Nutris.",
+  description: "Explore os e-books de nutrição da B2B Nutris: guias, mapas e fichas para apoiar a avaliação e o raciocínio clínico na consulta.",
   path: "/ebooks",
 });
 

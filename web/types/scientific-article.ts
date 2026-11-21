@@ -20,6 +20,7 @@ export type ScientificArticle = {
   summary: string;
   seoTitle?: string;
   seoDescription?: string;
+  seoTitleIsAbsolute?: boolean;
   primaryCategory: LibraryCategorySlug;
   tags: string[];
   primaryProductSlug: string;
