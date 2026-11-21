@@ -1,6 +1,20 @@
 {
   "version": 2,
   "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "83485963700bcf11d5bf78118facb301676b69d918fee2e45a95e7f1a2840f6c"
+    },
+    "landing-page-design": {
+      "source": "101-skills/superpowers",
+      "commit": "93a647364937903fa2f45629ca7c5f9c89fc57c9",
+      "sourceType": "github",
+      "skillPath": "guides/design/landing-page-design/SKILL.md",
+      "computedHash": "eb618aebcc80c8d5e675c75b4fbe22448d256c468e56380f2280a85e4876d84c"
+    },
     "seo-audit": {
       "source": "coreyhaines31/marketingskills",
       "commit": "88b0c7092326fec478fa2c0e5623869c00e2f95e",
