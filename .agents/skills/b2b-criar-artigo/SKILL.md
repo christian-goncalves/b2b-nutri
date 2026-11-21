@@ -1,6 +1,6 @@
 ---
 name: b2b-criar-artigo
-description: "Cria ou revisa um artigo científico da B2B Nutris a partir de um PDF, confere temas já cobertos em pendentes e publicados, e salva o Markdown em editorial/pendentes/<categoria>/."
+description: "Cria ou revisa um artigo científico da B2B Nutris a partir de um PDF, confere temas já cobertos em pendentes e publicados, e salva o Markdown em editorial/pendentes por categoria."
 ---
 
 # B2B Nutris | Criar artigo
@@ -33,12 +33,14 @@ Não acrescente estado ou bloco de aprovação ao Markdown. Não salve em `edito
 
 ## Estrutura do Markdown
 
-- `# Título` objetivo, ligado a uma dúvida ou tarefa clínica.
-- `**Resumo:**` em um parágrafo curto.
+- `# Título` claro e fiel ao recorte clínico. Ele é o H1 visível do artigo; não o force à faixa de caracteres do título SEO.
+- `**Resumo:**` em um parágrafo curto, específico ao artigo. É o resumo editorial visível, não a meta description; não aplique a ele a faixa de caracteres da meta description.
 - Resposta ou explicação direta no início.
 - Desenvolvimento em seções `##`, com exemplos ou tabelas somente quando ajudarem.
 - Conclusão breve, se fizer sentido.
 - `## Referências` com o PDF-base, título e páginas utilizadas, e fontes externas efetivamente consultadas. Manter links verificáveis quando disponíveis.
+
+Defina a extensão do corpo pelo que for necessário para responder à questão clínica com cobertura suficiente e respaldo nas fontes. Não imponha uma contagem universal de palavras nem aumente o texto para atingir um número; evite lacunas, repetição e preenchimento.
 
 ### Compatibilidade e leitura em telas estreitas
 

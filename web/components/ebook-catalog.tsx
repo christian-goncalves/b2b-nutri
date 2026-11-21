@@ -36,7 +36,7 @@ export function EbookCatalog({ books, categories }: EbookCatalogProps) {
       </p>
       {visibleBooks.length > 0 ? (
         <div className="book-grid">
-          {visibleBooks.map((book) => <BookCard key={book.id} book={book} />)}
+          {visibleBooks.map((book) => <BookCard key={book.id} book={book} headingLevel="h2" />)}
         </div>
       ) : (
         <p className="catalog-browser__empty">Ainda não há materiais publicados nesta categoria.</p>
