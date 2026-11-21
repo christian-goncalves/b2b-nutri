@@ -11,6 +11,8 @@ Melhorar clareza comercial, navegação e conversão da **B2B Nutris**, sem reco
 
 Esta é a própria skill `landing-page-design` adaptada ao repositório. **Não criar outra skill nem exigir a execução da `frontend-design`.** Consultar outras referências apenas quando a tarefa realmente exigir e o usuário autorizar.
 
+O site está em **desenvolvimento/preview**, sem publicação pública nesta fase. É permitido planejar e, quando autorizado, implementar interfaces antes da integração operacional, distinguindo claramente estados visuais de funcionalidades reais. Não publicar ou fazer deploy sem autorização específica.
+
 ## Fontes de verdade e prioridades
 
 1. Pedido atual do usuário, decisões expressamente aprovadas e restrições de escopo, respeitadas as instruções de maior prioridade.
@@ -18,7 +20,7 @@ Esta é a própria skill `landing-page-design` adaptada ao repositório. **Não 
 3. Conteúdo comercial/editorial aprovado e diagnóstico técnico validado pelo usuário.
 4. Princípios desta skill como apoio, **não como fórmulas obrigatórias**.
 
-Em caso de conflito entre uma regra genérica de landing page e o projeto existente, a implementação atual do repositório é a referência visual principal. Alterações visuais relevantes precisam de justificativa funcional, comercial, de acessibilidade ou de responsividade. Priorizar ajustes de conteúdo, hierarquia, ordem das seções e reutilização dos componentes existentes. Não substituir componentes, assets, tipografia, cores ou padrões visuais por preferência estética ou recomendação genérica de outra skill. Apresentar mudanças que ultrapassem a refatoração incremental aprovada para avaliação antes de executá-las. Os mockups de conversas anteriores **não são referência visual nem requisito de implementação**.
+Em caso de conflito entre uma regra genérica de landing page e o projeto existente, **não redesenhar por reflexo**: explicar o conflito e propor a menor mudança capaz de atender ao objetivo. Os mockups de conversas anteriores **não são referência visual nem requisito de implementação**.
 
 ## Fluxo de trabalho
 
@@ -28,7 +30,7 @@ Em caso de conflito entre uma regra genérica de landing page e o projeto existe
 
 **3. Executar somente quando solicitado:** uma auditoria ou pedido de planejamento é **somente leitura**. Não modificar arquivos, instalar dependências, gerar imagens, executar deploy ou acionar serviços externos sem autorização explícita. Se a implementação for autorizada, manter o trabalho restrito ao escopo aprovado.
 
-**4. Verificar:** conferir links, estados, acessibilidade e responsividade; executar os testes locais já existentes quando cabível. Informar claramente o que foi validado e o que não pôde ser verificado, especialmente renderização no navegador e serviços de e-mail.
+**4. Verificar:** conferir links, estados, acessibilidade e responsividade; executar os testes locais já existentes quando cabível. Validar a home visualmente em preview **independentemente** da integração de e-mail; testar confirmação e entrega somente quando operacionais. Informar claramente o que foi validado e o que não pôde ser verificado.
 
 ## Preservação técnica e visual
 
@@ -49,12 +51,13 @@ Usar esta ordem como **briefing comercial**, não como licença para reconstruir
 2. **Credibilidade compacta:** autoria e processo editorial somente quando verificáveis; referências e organização dos materiais, sem métricas inventadas.
 3. **Problema:** mostrar a perda de tempo causada por informações dispersas.
 4. **Benefícios:** facilidade de encontrar informações, aplicação na prática e construção de biblioteca de referência.
-5. **Três e-books em destaque:** renderizar três `BookCard` com link ao catálogo `/ebooks`, sem replicar os seis produtos ou filtros na home. A seleção definitiva requer validação do usuário; não alterar flags globais dos seis produtos como atalho.
+5. **Três e-books em destaque:** seleção aprovada: **Da Escuta à Conduta**, **O Olhar Comportamental na Consulta Nutricional** e **Guia Visual das Vitaminas**. Manter cada `BookCard` apontando à sua página individual e incluir botão separado **“Explorar todos os e-books”** para `/ebooks`. Não replicar os seis produtos nem alterar flags globais como atalho.
 6. **Biblioteca:** convite breve e links apenas para artigos publicados ou aprovados.
-7. **Sobre Bianca:** preservar a estrutura existente, completar apenas com biografia, formação e fotografia reais e aprovadas.
+7. **Sobre Bianca:** preservar a estrutura existente e usar o texto factual aprovado abaixo e a fotografia real fornecida, sem inventar credenciais nem substituir a pessoa por imagem fictícia.
 8. **Depoimentos:** **não publicar** exemplos demonstrativos; exibir a seção somente com depoimentos autênticos e autorizados.
 9. **Perguntas frequentes:** respostas objetivas e verificadas sobre público, formato digital, utilização, compra e guia gratuito; não prometer condições não implementadas.
-10. **CTA final:** reforçar o convite para receber gratuitamente o guia.
+10. **Contato:** preservar o fragmento `/#contato`; exibir **“WhatsApp: em breve”** e **“Instagram: em breve”** sem links ativos.
+11. **CTA final:** reforçar o convite para receber gratuitamente o guia.
 
 O fluxo de três passos do guia (*informar e-mail → confirmar endereço → receber PDF*) deve ser explicado perto da captação, **não obrigatoriamente em uma seção grande**. Remover da home repetições de produtos e a seção de “próximo lançamento” sem anúncio quando a refatoração estiver autorizada. Formulários de contato indisponíveis não devem parecer ativos.
 
@@ -69,11 +72,19 @@ O fluxo de três passos do guia (*informar e-mail → confirmar endereço → re
 
 Usar essa redação como base sem reescrevê-la por padrões genéricos de contagem de palavras. Ajustes de texto precisam respeitar a intenção aprovada.
 
+### Texto aprovado para a seção Sobre Bianca
+
+**Título:** Conheça Bianca Gonçalves
+
+**Texto:** “Bianca Gonçalves é nutricionista clínica (CRN-3 89451/P), formada pela Universidade Paulista (UNIP) e pós-graduada em Neurociência e Comportamento Alimentar pela PUC Campinas. Possui formação em Mindful Eating e atua em atendimentos particulares on-line, considerando a alimentação, o comportamento, o sono e as emoções em sua prática.”
+
+**Fonte factual:** `docs/curriculo-bianca/Curriculo_Bianca_Goncalves.pdf`. **Fotografia real editada:** usar, quando disponibilizada no repositório, `web/public/images/bianca/bianca-home.png` (sem legenda, com fundo transparente). Adaptar apenas enquadramento e apresentação ao layout existente; não gerar substituta nem presumir que o arquivo já foi copiado.
+
 ## Oferta gratuita e comércio
 
-- **Antes da Consulta** é um PDF gratuito de 15 páginas, voltado ao pré-atendimento nutricional. Sua presença no repositório **não** prova que exista entrega automatizada. Verificar no código e na configuração disponíveis se o fluxo está realmente implementado antes de considerá-lo operacional.
-- Fluxo comercial **planejado, ainda sujeito à implementação técnica**: cadastrar e-mail, verificar endereço e enviar o PDF automaticamente. Não publicar botão, formulário ou mensagem que prometa a entrega enquanto o fluxo não funcionar. Quando houver dependência técnica, registrá-la no planejamento e propor uma solução coerente com a implementação existente. Consentimento para marketing é separado da verificação do e-mail.
-- Não integrar provedores de e-mail, alterar formulários, criar endpoints, armazenar contatos, iniciar disparos ou acrescentar funcionalidades por iniciativa própria; essas mudanças dependem de autorização.
+- **Antes da Consulta** é um PDF gratuito de 15 páginas, voltado ao pré-atendimento nutricional. O original foi disponibilizado na pasta `ebooks/` da raiz do projeto, que não equivale a um asset público da aplicação. Confirmar sua presença no checkout atual antes da integração. **Para a oferta visual em preview, basta a capa; não é necessário criar amostra nem página individual.** Não publicar download direto por padrão.
+- Fluxo comercial **planejado, ainda sujeito à implementação técnica**: cadastrar e-mail, verificar endereço e enviar o PDF automaticamente. A interface da captação pode ser construída em preview com formulário, validação e estados de teste identificados, mas não pode simular envio, confirmação ou entrega como reais. O CTA pode ser apresentado visualmente sem prometer operação ainda indisponível. Consentimento para marketing é separado da verificação do e-mail.
+- Não integrar provedores de e-mail, alterar formulários, criar endpoints, armazenar contatos ou iniciar disparos por iniciativa própria.
 - Os e-books pagos são promovidos no site; compra e entrega utilizam **Hotmart** conforme os vínculos efetivamente configurados. Não inventar preços, URLs de checkout, descontos ou disponibilidade.
 - Se o PDF gratuito tiver metadados internos incorretos, registrar o problema; não editar o documento sem solicitação.
 
