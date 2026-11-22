@@ -405,7 +405,7 @@ body { background: var(--color-background-page); }
   .hero-layout, .about-layout, .upcoming-layout, .contact-layout { grid-template-columns:1fr; }
   .hero-layout { gap:var(--space-4); }
   .home-hero__layout { grid-template-columns: 1fr; gap: var(--space-6); }
-  .home-hero__copy { align-items: center; text-align: center; }
+  .home-hero__copy { min-height: fit-content; align-items: center; text-align: center; }
   .home-hero__copy h1 { max-width: 16ch; }
   .home-hero__copy > p { text-align: center; }
   .home-hero__actions { margin-inline: auto; }
