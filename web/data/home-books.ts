@@ -139,5 +139,13 @@ export const homeBooks: HomeBook[] = [
 
 export const sliderBooks = homeBooks.filter((book) => book.featuredInSlider);
 export const featuredHomeBooks = homeBooks.filter((book) => book.featuredOnHome);
+const homeShowcaseSlugs = [
+  "da-escuta-a-conduta",
+  "o-olhar-comportamental-na-consulta-nutricional",
+  "guia-visual-das-vitaminas",
+] as const;
+export const homeShowcaseBooks = homeShowcaseSlugs
+  .map((slug) => homeBooks.find((book) => book.slug === slug))
+  .filter((book): book is HomeBook => book !== undefined);
 export const ebooks = homeBooks.filter((book) => book.published);
 export const ebookCategories = [...new Set(ebooks.map((book) => book.category))].sort((a, b) => a.localeCompare(b, "pt-BR"));

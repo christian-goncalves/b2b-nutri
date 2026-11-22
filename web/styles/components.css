@@ -256,6 +256,32 @@ body { background: var(--color-background-page); }
 .contact-form .control { background:var(--color-surface); }
 .contact-form .btn { justify-self:start; }
 
+/* FAQ e prévia da captação do guia na home */
+.home-faq__list { width:min(100%, 850px); margin-inline:auto; display:grid; gap:var(--space-3); }
+.home-faq__item { padding:var(--space-4) var(--space-6); border:1px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface); }
+.home-faq__item summary { color:var(--color-brand-primary); font-weight:var(--weight-semibold); cursor:pointer; }
+.home-faq__item summary:focus-visible { outline:2px solid var(--color-focus); outline-offset:4px; border-radius:2px; }
+.home-faq__item p { margin-top:var(--space-3); color:var(--color-text-muted); line-height:1.65; }
+.home-faq__item strong { color:var(--color-brand-primary); }
+.guide-section { display:grid; grid-template-columns:minmax(0, 1.1fr) minmax(280px, .9fr); gap:clamp(28px, 6vw, 72px); align-items:center; }
+.guide-section__copy { display:grid; justify-items:start; gap:var(--space-4); }
+.guide-section__copy h2 { color:var(--color-brand-primary); font-family:var(--font-display); font-size:clamp(30px, 4vw, 46px); line-height:1.12; }
+.guide-section__copy > p:not(.hero-eyebrow) { max-width:58ch; color:var(--color-text-muted); }
+.guide-steps { display:grid; gap:var(--space-3); width:100%; margin:var(--space-2) 0 0; padding:0; list-style:none; }
+.guide-steps li { display:grid; grid-template-columns:36px minmax(0,1fr); gap:var(--space-3); align-items:start; }
+.guide-steps li > span { display:grid; width:32px; height:32px; place-items:center; border-radius:50%; background:var(--color-highlight); color:var(--color-brand-primary); font-weight:var(--weight-bold); }
+.guide-steps strong { display:block; color:var(--color-brand-primary); }
+.guide-steps p { margin-top:3px; color:var(--color-text-muted); font-size:var(--text-small); }
+.guide-form { display:grid; gap:var(--space-3); }
+.guide-form__preview-note { color:var(--color-text-muted); font-size:var(--text-small); }
+.guide-form__message { padding:var(--space-3); border-radius:var(--radius-md); font-size:var(--text-small); }
+.guide-form__message--loading { background:var(--color-highlight); color:var(--color-brand-primary); }
+.guide-form__message--error { background:var(--color-table-note); color:var(--color-error); }
+.guide-form__message--success { background:var(--color-background-library-soft); color:var(--color-success); }
+.guide-form__controls { display:flex; flex-wrap:wrap; gap:var(--space-2); margin:var(--space-2) 0 0; padding:var(--space-3); border:1px dashed var(--color-border-hover); border-radius:var(--radius-md); }
+.guide-form__controls legend { padding-inline:var(--space-2); color:var(--color-text-muted); font-size:var(--text-caption); }
+.guide-form__controls .btn { white-space:normal; }
+
 /* 08. Footer wine */
 .site-footer { background:var(--color-brand-primary); color:var(--color-text-on-dark); padding-block:clamp(35px,5vw,64px); }
 .site-footer__inner { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:var(--space-8); }
@@ -281,6 +307,7 @@ body { background: var(--color-background-page); }
   .site-nav[data-open="true"] { display:flex; }
   .hero-layout, .about-layout, .upcoming-layout, .contact-layout { grid-template-columns:1fr; }
   .hero-layout { gap:16px; }
+  .guide-section { grid-template-columns:1fr; }
   .hero-cover-wrap { min-height:250px; }
   .about-photo { margin:auto; max-width:260px; }
   .about-copy { align-items:flex-start; }
