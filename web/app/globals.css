@@ -50,7 +50,7 @@ summary:focus-visible {
 .foundation-nav {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 2.3vw, 28px);
+  gap: clamp(var(--space-3), 2.3vw, var(--space-7));
 }
 
 .foundation-nav a,
@@ -92,7 +92,7 @@ summary:focus-visible {
 .foundation-menu-icon {
   display: grid;
   width: 30px;
-  gap: 6px;
+  gap: var(--space-6px);
 }
 
 .foundation-menu-icon span {
@@ -125,7 +125,7 @@ summary:focus-visible {
   display: grid;
   min-height: min(62vh, 620px);
   place-items: center;
-  padding: clamp(48px, 8vw, 96px) var(--space-6);
+  padding: clamp(var(--space-12), 8vw, var(--space-24)) var(--space-6);
   background: var(--color-background-hero);
   text-align: center;
 }
@@ -183,7 +183,7 @@ summary:focus-visible {
 .library-article-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2.4vw, 28px);
+  gap: clamp(var(--space-4), 2.4vw, var(--space-7));
 }
 
 .library-category-card {
@@ -193,7 +193,7 @@ summary:focus-visible {
 
 .library-category-card .card__body {
   gap: var(--space-4);
-  padding: clamp(20px, 3vw, 32px);
+  padding: clamp(var(--space-5), 3vw, var(--space-8));
 }
 
 .library-category-card .card__title {
@@ -261,12 +261,12 @@ summary:focus-visible {
 }
 
 .library-intro--category {
-  margin-bottom: clamp(36px, 5vw, 56px);
+  margin-bottom: clamp(var(--space-9), 5vw, var(--space-14));
 }
 
 .library-articles,
 .library-related {
-  margin-top: clamp(40px, 6vw, 72px);
+  margin-top: clamp(var(--space-10), 6vw, var(--space-18));
 }
 
 .library-article-card__meta {
@@ -281,7 +281,7 @@ summary:focus-visible {
 
 .scientific-article__header {
   max-width: 780px;
-  margin: 0 auto clamp(36px, 6vw, 64px);
+  margin: 0 auto clamp(var(--space-9), 6vw, var(--space-16));
 }
 
 .scientific-article__header h1 {
@@ -328,7 +328,7 @@ summary:focus-visible {
 }
 
 .scientific-article__tags li {
-  padding: 5px 10px;
+  padding: var(--space-5px) var(--space-10px);
   border: 1px solid var(--color-border-warm);
   border-radius: 999px;
   color: var(--color-primary);
@@ -344,7 +344,7 @@ summary:focus-visible {
 }
 
 .scientific-article__body :where(h2, h3, h4) {
-  margin: 1.8em 0 0.55em;
+  margin: var(--space-article-heading-before) 0 var(--space-article-heading-after);
   color: var(--color-primary);
   font-family: var(--font-display);
   line-height: 1.25;
@@ -353,8 +353,8 @@ summary:focus-visible {
 .scientific-article__body :where(h2) { font-size: var(--text-h2); }
 .scientific-article__body :where(h3) { font-size: var(--text-h3); }
 .scientific-article__body :where(h4) { font-size: var(--text-h4); }
-.scientific-article__body :where(p, ul, ol, blockquote, table) { margin-block: 0 1.1em; }
-.scientific-article__body :where(ul, ol) { padding-left: 1.5em; }
+.scientific-article__body :where(p, ul, ol, blockquote, table) { margin-block: 0 var(--space-article-block); }
+.scientific-article__body :where(ul, ol) { padding-left: var(--space-content-list-indent); }
 .scientific-article__body blockquote {
   margin-inline: 0;
   padding: var(--space-4) var(--space-6);
@@ -371,7 +371,7 @@ summary:focus-visible {
 
 .scientific-article__references {
   max-width: 72ch;
-  margin: clamp(36px, 5vw, 56px) auto 0;
+  margin: clamp(var(--space-9), 5vw, var(--space-14)) auto 0;
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-border);
 }
@@ -385,7 +385,7 @@ summary:focus-visible {
 .scientific-article__references ol {
   display: grid;
   gap: var(--space-3);
-  padding-left: 1.5em;
+  padding-left: var(--space-content-list-indent);
   color: var(--color-text-muted);
   font-size: var(--text-small);
 }
@@ -394,16 +394,16 @@ summary:focus-visible {
 
 /* Reduz apenas o espaço entre o fim do artigo e o e-book principal. */
 .library-page > .scientific-article {
-  padding-bottom: calc(clamp(48px, 6.5vw, 88px) / 2);
+  padding-bottom: calc(clamp(var(--space-12), 6.5vw, var(--space-22)) / 2);
 }
 
 .library-page > [aria-labelledby="primary-book-title"] {
-  padding-top: calc(clamp(48px, 6.5vw, 88px) / 2);
+  padding-top: calc(clamp(var(--space-12), 6.5vw, var(--space-22)) / 2);
 }
 
 @media (max-width: 499px) {
-  .library-page > .scientific-article { padding-bottom: 23px; }
-  .library-page > [aria-labelledby="primary-book-title"] { padding-top: 23px; }
+  .library-page > .scientific-article { padding-bottom: var(--space-23px); }
+  .library-page > [aria-labelledby="primary-book-title"] { padding-top: var(--space-23px); }
 }
 
 @media (max-width: 620px) {
@@ -500,7 +500,7 @@ summary:focus-visible {
   display: grid;
   grid-template-rows: 1.2em auto 3em 48px;
   align-content: center;
-  gap: 10px;
+  gap: var(--space-10px);
   overflow: hidden;
 }
 
@@ -586,7 +586,7 @@ summary:focus-visible {
 
   .hero-copy__panel {
     grid-template-rows: 1.2em auto 3em 48px;
-    gap: 10px;
+    gap: var(--space-10px);
   }
 
   .hero-copy__panel h1 {
@@ -642,7 +642,7 @@ summary:focus-visible {
 }
 
 .upcoming-empty {
-  padding: clamp(24px, 5vw, 48px);
+  padding: clamp(var(--space-6), 5vw, var(--space-12));
   border: 1px dashed var(--color-border-hover);
   border-radius: var(--radius-lg);
   color: var(--color-text-muted);
@@ -708,7 +708,7 @@ summary:focus-visible {
 .form-feedback-dialog__content {
   display: grid;
   gap: var(--space-4);
-  padding: clamp(24px, 5vw, 36px);
+  padding: clamp(var(--space-6), 5vw, var(--space-9));
 }
 
 .form-feedback-dialog h2 {
@@ -738,7 +738,7 @@ summary:focus-visible {
 .foundation-footer__links {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-10px);
 }
 
 .foundation-footer__links a {
@@ -825,7 +825,7 @@ summary:focus-visible {
 
 .category-filter__button {
   min-height: var(--control-md);
-  padding: 8px 16px;
+  padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border-warm);
   border-radius: 999px;
   background: var(--color-surface);
@@ -879,7 +879,7 @@ summary:focus-visible {
 .product-breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
   margin-bottom: var(--space-6);
   color: var(--color-text-muted);
   font-size: var(--text-small);
@@ -897,14 +897,14 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   align-items: start;
-  gap: clamp(32px, 6vw, 76px);
+  gap: clamp(var(--space-8), 6vw, var(--space-19));
 }
 
 .product-detail__cover {
   display: grid;
   min-height: 300px;
   place-items: center;
-  padding: clamp(16px, 3vw, 32px);
+  padding: clamp(var(--space-4), 3vw, var(--space-8));
   border: 1px solid var(--color-border-warm);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -955,7 +955,7 @@ summary:focus-visible {
 .product-highlights ul {
   display: grid;
   gap: var(--space-2);
-  padding-left: 1.25rem;
+  padding-left: var(--space-reader-list-indent);
   color: var(--color-text-muted);
 }
 
@@ -1009,17 +1009,17 @@ summary:focus-visible {
 
 .sample-reader__controls {
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .sample-reader__navigation {
   order: 1;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .sample-reader__viewport {
   order: 2;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .sample-reader__zoom {

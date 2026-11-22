@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookCard } from "@/components/book-card";
-import { GuideCaptureForm } from "@/components/guide-capture-form";
+import { HomeHeroInteraction } from "@/components/home-hero-interaction";
 import { SectionHeading } from "@/components/section-heading";
 import { homeShowcaseBooks } from "@/data/home-books";
 import { createPageMetadata } from "@/lib/seo";
@@ -15,29 +15,56 @@ export const metadata = createPageMetadata({
 export default function HomePage() {
   return (
     <main>
-      <section className="section--hero home-section" aria-labelledby="hero-title">
-        <div className="site-container hero-layout">
-          <div className="hero-copy">
-            <span className="hero-eyebrow">B2B Nutris · conhecimento organizado</span>
-            <h1 id="hero-title">Sua prática nutricional merece conhecimento organizado e ferramentas à mão.</h1>
+      <section className="section--hero home-section home-hero" aria-labelledby="hero-title">
+        <div className="site-container home-hero__layout">
+          <div className="home-hero__copy">
+            <span className="hero-eyebrow">E-books e guias para nutricionistas</span>
+            <h1 id="hero-title">
+              Conhecimento à mão.{" "}
+              <span className="home-hero__highlight home-hero__highlight--light-20">
+                Mais praticidade no seu dia a dia.
+              </span>
+            </h1>
             <p>
-              Guias, materiais de referência e recursos práticos para facilitar o estudo, a consulta e a organização dos atendimentos. Um acervo desenvolvido pela B2B Nutris com a experiência profissional da nutricionista Bianca.
+              Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
             </p>
-            <div className="hero-actions">
-              <Link href="#guia-gratuito" className="btn btn--primary btn--lg">
-                Receba gratuitamente o guia Antes da Consulta
-              </Link>
-              <Link href="/ebooks" className="btn btn--secondary">
-                Explorar e-books
-              </Link>
+            <div className="home-hero__actions">
+              <HomeHeroInteraction />
             </div>
           </div>
-          <aside className="contact-card" aria-label="Oferta do guia gratuito Antes da Consulta">
-            <span className="section-heading__eyebrow">Guia gratuito</span>
-            <h2>Antes da Consulta</h2>
-            <p>Um material para apoiar a organização do pré-atendimento nutricional.</p>
-            <Link href="#guia-gratuito" className="btn btn--primary">Conhecer o fluxo do guia</Link>
-          </aside>
+          <figure className="home-hero__visual">
+            <div className="home-hero__page home-hero__page--back" aria-hidden="true">
+              <Image src="/images/home-guide-poster-back.png" alt="" width={1055} height={1491} sizes="(max-width: 767px) 72vw, 29vw" />
+            </div>
+            <div className="home-hero__page home-hero__page--front">
+              <Image
+                src="/images/home-guide-poster-front.png"
+                alt="Arte temporária do guia gratuito Antes da Consulta para nutricionistas, com a capa e telas do material."
+                width={1055}
+                height={1491}
+                sizes="(max-width: 767px) 82vw, 34vw"
+                preload
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section className="home-section section--featured home-library-selection" id="ebooks-em-destaque" aria-labelledby="featured-title">
+        <div className="site-container">
+          <SectionHeading
+            id="featured-title"
+            eyebrow="Seleção da biblioteca"
+            title="E-books em destaque"
+            description="Materiais de referência para apoiar diferentes momentos da prática nutricional."
+            centered
+          />
+          <div className="book-grid">
+            {homeShowcaseBooks.map((book) => <BookCard key={book.id} book={book} />)}
+          </div>
+          <div className="home-section__action">
+            <Link href="/ebooks" className="btn btn--primary">Explorar todos os e-books</Link>
+          </div>
         </div>
       </section>
 
@@ -76,24 +103,6 @@ export default function HomePage() {
             <article className="card"><div className="card__body"><h3 className="card__title">Encontre o que precisa, com mais facilidade</h3></div></article>
             <article className="card"><div className="card__body"><h3 className="card__title">Leve o conhecimento para a prática</h3></div></article>
             <article className="card"><div className="card__body"><h3 className="card__title">Construa sua própria biblioteca de referência</h3></div></article>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-section section--featured home-library-selection" aria-labelledby="featured-title">
-        <div className="site-container">
-          <SectionHeading
-            id="featured-title"
-            eyebrow="Seleção da biblioteca"
-            title="E-books em destaque"
-            description="Materiais de referência para apoiar diferentes momentos da prática nutricional."
-            centered
-          />
-          <div className="book-grid">
-            {homeShowcaseBooks.map((book) => <BookCard key={book.id} book={book} />)}
-          </div>
-          <div className="home-section__action">
-            <Link href="/ebooks" className="btn btn--primary">Explorar todos os e-books</Link>
           </div>
         </div>
       </section>
@@ -185,23 +194,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section section--hero" id="guia-gratuito" aria-labelledby="guide-title">
-        <div className="site-container guide-section">
-          <div className="guide-section__copy">
-            <p className="hero-eyebrow">Oferta gratuita · interface em prévia</p>
-            <h2 id="guide-title">Receba gratuitamente o guia Antes da Consulta</h2>
-            <p>O fluxo planejado tem três etapas. Esta interface não coleta nem envia endereços de e-mail e não disponibiliza o PDF.</p>
-            <ol className="guide-steps" aria-label="Etapas previstas para receber o guia">
-              <li><span>1</span><div><strong>Informe seu e-mail</strong><p>O endereço será solicitado pela interface.</p></div></li>
-              <li><span>2</span><div><strong>Confirme o endereço</strong><p>A confirmação ainda não está integrada.</p></div></li>
-              <li><span>3</span><div><strong>Receba o material</strong><p>A entrega depende de integração e autorização do PDF.</p></div></li>
-            </ol>
-          </div>
-          <div className="contact-card guide-section__form">
-            <GuideCaptureForm />
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

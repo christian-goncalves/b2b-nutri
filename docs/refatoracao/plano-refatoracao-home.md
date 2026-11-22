@@ -4,7 +4,7 @@ Plano para reorganizar a home da B2B Nutris em preview, preservando a interface 
 
 | Campo | Definição |
 | --- | --- |
-| Status | Planejamento consolidado; implementação não iniciada |
+| Status | Referência técnica; a sequência de trabalho está em [roteiro-enxuto-home.md](roteiro-enxuto-home.md) |
 | Público | Responsável pelo projeto e futura pessoa implementadora |
 | Escopo | Composição da home, destaque de três e-books, apresentação profissional, canais em breve, FAQ e interface de captação do guia |
 | Fora de escopo | Redesign, mudança de produtos ou flags globais, alteração de `BookCard`, decisão ou instalação de provedor de e-mail, publicação e deploy |
@@ -112,7 +112,7 @@ Os caminhos abaixo descrevem escopo futuro. Nenhum deles será alterado ao revis
 
 ## 8. Etapas, critérios e checkpoints
 
-As etapas abaixo pertencem a esta refatoração da home e não reabrem checkpoints gerais já registrados em `docs/roteiro.md`. A aprovação deste plano não autoriza iniciar código. Em futura execução, trabalhar uma etapa por vez, apresentar seu checkpoint e aguardar `APROVADO CP-XX` antes de avançar. Não publicar nem fazer deploy sem decisão posterior explícita.
+O [roteiro enxuto da home](roteiro-enxuto-home.md) controla a ordem atual, com um item por checkpoint. As etapas abaixo preservam critérios técnicos da proposta detalhada e não autorizam avançar para outra seção, integrar a captação, publicar ou fazer deploy.
 
 ### Etapa 1: Conteúdo e composição da home, CP-01
 

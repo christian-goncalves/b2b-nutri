@@ -90,6 +90,56 @@
   --space-8: 32px;
   --space-12: 48px;
 
+
+  /* Medidas existentes: extensao da escala, sem arredondamento visual.
+     Sufixo px identifica intervalos fora dos multiplos de 4px. */
+  --space-3px: 3px;
+  --space-5px: 5px;
+  --space-6px: 6px;
+  --space-10px: 10px;
+  --space-14px: 14px;
+  --space-15px: 15px;
+  --space-18px: 18px;
+  --space-5: 20px;
+  --space-22px: 22px;
+  --space-23px: 23px;
+  --space-25px: 25px;
+  --space-26px: 26px;
+  --space-7: 28px;
+  --space-30px: 30px;
+  --space-35px: 35px;
+  --space-9: 36px;
+  --space-38px: 38px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-45px: 45px;
+  --space-46px: 46px;
+  --space-50px: 50px;
+  --space-54px: 54px;
+  --space-14: 56px;
+  --space-15: 60px;
+  --space-16: 64px;
+  --space-70px: 70px;
+  --space-18: 72px;
+  --space-74px: 74px;
+  --space-19: 76px;
+  --space-20: 80px;
+  --space-22: 88px;
+  --space-90px: 90px;
+  --space-24: 96px;
+  --space-30: 120px;
+
+  /* Espacamentos relativos ao texto; preservam a unidade original. */
+  --space-article-heading-before: 1.8em;
+  --space-article-heading-after: 0.55em;
+  --space-article-block: 1.1em;
+  --space-content-list-indent: 1.5em;
+  --space-reader-list-indent: 1.25rem;
+
+  /* Ajustes exclusivos do hero: nao definem o padrao das outras secoes. */
+  --space-home-hero-copy-offset: calc(22px - var(--space-4));
+  --space-home-hero-mobile-bottom: 64.4px;
+
   /* Raios aprovados */
   --radius-sm: 4px;
   --radius-md: 8px;

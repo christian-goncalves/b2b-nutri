@@ -8,7 +8,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: "700",
+  weight: ["500", "700"],
+  style: ["normal", "italic"],
   variable: "--font-playfair",
   display: "swap",
 });
