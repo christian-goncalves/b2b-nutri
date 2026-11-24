@@ -37,4 +37,4 @@ Ao retorno, confira o que foi possível aplicar e como a pessoa respondeu. Revis
 
 ## Referências
 
-B2B Nutris. *Da Escuta à Conduta*. PDF, páginas 5-8: sinais de atenção e encaminhamento, organização dos achados clínicos, critérios para priorização clínica e construção da conduta individualizada. Arquivo: `ebooks/03 - Da Escuta  Conduta B2B.pdf`.
+B2B Nutris. *Da Escuta à Conduta*. PDF, páginas 5-8: sinais de atenção e encaminhamento, organização dos achados clínicos, critérios para priorização clínica e construção da conduta individualizada. Arquivo: `ebooks/03 - Da Escuta à Conduta.pdf`.

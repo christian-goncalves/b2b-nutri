@@ -94,6 +94,8 @@ export default async function EbookDetailPage({ params }: EbookPageProps) {
                 <a className="btn btn--primary btn--lg" href={ebook.hotmartUrl} target="_blank" rel="noreferrer">
                   COMPRAR NA HOTMART
                 </a>
+              ) : ebook.isFree ? (
+                <p className="product-detail__free" role="status">Material gratuito para nutricionistas.</p>
               ) : (
                 <p className="product-detail__pending" role="status">O link individual de compra na Hotmart ainda não foi informado.</p>
               )}

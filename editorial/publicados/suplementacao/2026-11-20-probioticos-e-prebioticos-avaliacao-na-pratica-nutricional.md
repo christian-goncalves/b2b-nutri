@@ -38,6 +38,6 @@ Probióticos e prebióticos pedem decisões diferentes e individualizadas. Para 
 
 ## Referências
 
-- B2B Nutris. *Suplementos*, seções “Probióticos” e “Prebióticos”. E-book em PDF, páginas 23–26. Arquivo: `ebooks/06 - SuplementaoB2Bnutris.pdf`.
+- B2B Nutris. *Suplementos*, seções “Probióticos” e “Prebióticos”. E-book em PDF, páginas 23–26. Arquivo: `ebooks/06 - Guia de Suplementação Na Prática Clínica.pdf`.
 - World Gastroenterology Organisation. *Probiotics and prebiotics: WGO Global Guideline*. 2023. [Diretriz](https://www.worldgastroenterology.org/UserFiles/file/guidelines/probiotics-and-prebiotics-english-2023.pdf).
 - Su GL, Ko CW, Bercik P, et al. *AGA Clinical Practice Guidelines on the Role of Probiotics in the Management of Gastrointestinal Disorders*. 2020. [Diretriz da American Gastroenterological Association](https://gastro.org/clinical-guidance/role-of-probiotics-in-the-management-of-gastrointestinal-disorders/).

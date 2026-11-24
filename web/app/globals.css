@@ -666,9 +666,7 @@ summary:focus-visible {
 .book-card__cover img {
   display: block;
   width: 100%;
-  max-width: 340px;
-  height: 180px;
-  object-fit: contain;
+  height: auto;
 }
 
 .about-copy .section-heading__eyebrow {
@@ -966,6 +964,12 @@ summary:focus-visible {
   background: var(--color-surface-alt);
   color: var(--color-text-muted);
   font-size: var(--text-small);
+}
+
+.product-detail__free {
+  color: var(--color-complement-text);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
 }
 
 .product-sample__heading {

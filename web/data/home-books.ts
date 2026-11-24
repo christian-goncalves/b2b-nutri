@@ -1,18 +1,47 @@
-import daEscutaCover from "../public/images/books/da-escuta-a-conduta.png";
-import menteClinicaVol01Cover from "../public/images/books/mente-clinica-vol-01.png";
-import menteClinicaVol02Cover from "../public/images/books/mente-clinica-vol-02.png";
-import mineraisCover from "../public/images/books/minerais.png";
-import suplementacaoCover from "../public/images/books/suplementacao-clinica.png";
-import vitaminasCover from "../public/images/books/guia-visual-vitaminas.png";
+import antesDaConsultaCover from "../public/images/books/00-antes-da-consulta.png";
+import daEscutaCover from "../public/images/books/03-da-escuta-a-conduta.png";
+import menteClinicaVol01Cover from "../public/images/books/01-o-olhar-comportamental-na-consulta-nutricional.png";
+import menteClinicaVol02Cover from "../public/images/books/02-por-tras-do-comportamento-alimentar.png";
+import mineraisCover from "../public/images/books/05-minerais.png";
+import suplementacaoCover from "../public/images/books/06-guia-pratico-de-suplementacao-na-pratica-clinica.png";
+import vitaminasCover from "../public/images/books/04-guia-visual-das-vitaminas.png";
 import type { HomeBook } from "@/types/home-book";
 
 export const homeBooks: HomeBook[] = [
+  {
+    id: "antes-da-consulta",
+    slug: "antes-da-consulta",
+    title: "Antes da Consulta",
+    heroTitle: "Antes da consulta",
+    category: "Prática Clínica",
+    coverCollection: "Prática Clínica",
+    description: "Questionário de pré-atendimento e guia de preparação para nutricionistas.",
+    heroDescription: "Como reunir informações importantes sem transformar o pré-atendimento em uma consulta antecipada.",
+    longDescription: "Material gratuito para nutricionistas que apresenta um questionário de pré-atendimento e orienta a preparação da primeira consulta. Reúne informações iniciais sobre motivo da procura, saúde, rotina e expectativas, sem antecipar a avaliação ou definir condutas.",
+    cover: antesDaConsultaCover,
+    coverAlt: "Capa do guia Antes da Consulta, questionário de pré-atendimento e preparação para nutricionistas",
+    highlights: [
+      "Conhecer o motivo da procura, informações iniciais de saúde, rotina e expectativas.",
+      "Preparar perguntas para aprofundar durante a consulta.",
+      "Usar as respostas como ponto de partida, sem substituir a anamnese ou definir condutas antecipadas.",
+    ],
+    audience: "Nutricionistas que preparam consultas clínicas.",
+    relatedSlugs: ["da-escuta-a-conduta"],
+    samplePdf: { path: "/samples/antes-da-consulta.pdf", authorized: true },
+    hotmartUrl: null,
+    isFree: true,
+    published: true,
+    seo: { title: "Antes da Consulta", description: "Questionário de pré-atendimento e guia de preparação para nutricionistas." },
+    featuredInSlider: false,
+    featuredOnHome: false,
+  },
   {
     id: "mente-clinica-vol-01",
     slug: "o-olhar-comportamental-na-consulta-nutricional",
     title: "O Olhar Comportamental na Consulta Nutricional",
     heroTitle: "O olhar comportamental",
     category: "Comportamento alimentar",
+    coverCollection: "Comportamento Alimentar",
     collection: "Coleção Mente Clínica · Volume 01",
     description: "Da escuta à construção de estratégias na prática clínica.",
     heroDescription: "Da escuta à construção de estratégias na prática clínica.",
@@ -35,6 +64,7 @@ export const homeBooks: HomeBook[] = [
     title: "Por trás do comportamento alimentar",
     heroTitle: "Por trás do comportamento",
     category: "Comportamento alimentar",
+    coverCollection: "Comportamento Alimentar",
     collection: "Coleção Mente Clínica · Volume 02",
     description: "Compreendendo gatilhos, funções e padrões que sustentam o comportamento.",
     heroDescription: "Gatilhos, funções e padrões do comportamento alimentar.",
@@ -57,6 +87,7 @@ export const homeBooks: HomeBook[] = [
     title: "Da Escuta à Conduta",
     heroTitle: "Da escuta à conduta",
     category: "Raciocínio clínico",
+    coverCollection: "Prática Clínica",
     description: "8 mapas para organizar o raciocínio clínico na consulta nutricional.",
     heroDescription: "Oito mapas para organizar o raciocínio clínico.",
     longDescription: "Conjunto de oito mapas que percorre etapas do raciocínio clínico na consulta nutricional, da escuta e anamnese à avaliação, diagnóstico, plano, conduta, acompanhamento e reavaliação. O material descreve um percurso flexível, ajustado às necessidades e ao contexto de cada paciente.",
@@ -78,6 +109,7 @@ export const homeBooks: HomeBook[] = [
     title: "Guia Visual das Vitaminas",
     heroTitle: "Guia visual das vitaminas",
     category: "Vitaminas",
+    coverCollection: "Micronutrientes",
     description: "Fundamentos e aplicação clínica em fichas técnicas para consulta profissional.",
     heroDescription: "Fundamentos e aplicação clínica em fichas técnicas.",
     longDescription: "Guia de referência visual com fichas de vitaminas. O conteúdo consultado inclui funções, sinais associados à deficiência, fontes alimentares, ingestão de referência e interações e cuidados, com fontes e revisão indicadas no próprio material.",
@@ -99,6 +131,7 @@ export const homeBooks: HomeBook[] = [
     title: "Minerais",
     heroTitle: "Minerais",
     category: "Minerais",
+    coverCollection: "Micronutrientes",
     description: "Guia clínico e nutricional com 45 fichas clínicas.",
     heroDescription: "Guia clínico e nutricional com 45 fichas.",
     longDescription: "Guia visual com fichas sobre minerais e elementos de interesse nutricional. O conteúdo inclui ingestão de referência, funções, fontes alimentares, interações, avaliação e cuidados de interpretação clínica, com referências identificadas nas fichas.",
@@ -120,6 +153,7 @@ export const homeBooks: HomeBook[] = [
     title: "Guia Prático de Suplementação na Prática Clínica",
     heroTitle: "Suplementação clínica",
     category: "Suplementação nutricional",
+    coverCollection: "Suplementação",
     description: "Evidências, aplicações clínicas e conduta nutricional em 17 temas e 34 fichas.",
     heroDescription: "Evidências e condutas em 17 temas e 34 fichas.",
     longDescription: "Guia de consulta sobre suplementação nutricional, organizado em 17 temas e 34 fichas. As fichas abordam evidências e limitações, avaliação, aplicações clínicas, condutas e monitoramento, destacando a necessidade de decisão individualizada conforme o contexto clínico.",

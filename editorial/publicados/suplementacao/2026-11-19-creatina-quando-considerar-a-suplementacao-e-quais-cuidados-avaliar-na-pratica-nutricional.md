@@ -34,7 +34,7 @@ A creatina pode ser considerada quando o objetivo envolve força, potência ou a
 
 ## Referências
 
-- B2B Nutris. *Suplementos*, seção “Creatina”. E-book em PDF, páginas 3-4. Arquivo: `ebooks/06 - SuplementaoB2Bnutris.pdf`.
+- B2B Nutris. *Suplementos*, seção “Creatina”. E-book em PDF, páginas 3-4. Arquivo: `ebooks/06 - Guia de Suplementação Na Prática Clínica.pdf`.
 - Kreider RB, et al. International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine. *Journal of the International Society of Sports Nutrition*. 2017;14:18. [DOI: 10.1186/s12970-017-0173-z](https://doi.org/10.1186/s12970-017-0173-z).
 - Candow DG, et al. Creatine monohydrate supplementation for older adults and clinical populations. *Journal of the International Society of Sports Nutrition*. 2025;22(sup1):2534130. [DOI: 10.1080/15502783.2025.2534130](https://doi.org/10.1080/15502783.2025.2534130).
 - Almeida AS, et al. Impact of creatine supplementation on kidney health: a systematic review and meta-analysis. *International Urology and Nephrology*. 2026;58:5423-5434. [DOI: 10.1007/s11255-026-05287-x](https://doi.org/10.1007/s11255-026-05287-x).

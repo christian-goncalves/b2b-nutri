@@ -89,7 +89,7 @@ const approvedArticles: ScientificArticle[] = [
     scientificReferences: [
       {
         title: "Suplementos, seção Creatina",
-        citation: "B2B Nutris. Suplementos, seção Creatina. E-book em PDF, páginas 3-4. Arquivo: ebooks/06 - SuplementaoB2Bnutris.pdf.",
+        citation: "B2B Nutris. Suplementos, seção Creatina. E-book em PDF, páginas 3-4. Arquivo: ebooks/06 - Guia de Suplementação Na Prática Clínica.pdf.",
       },
       {
         title: "International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine",
@@ -190,7 +190,7 @@ const approvedArticles: ScientificArticle[] = [
     scientificReferences: [
       {
         title: "Da Escuta à Conduta",
-        citation: "B2B Nutris. Da Escuta à Conduta. E-book em PDF, páginas 5-8: sinais de atenção e encaminhamento, organização dos achados clínicos, critérios para priorização clínica e construção da conduta individualizada. Arquivo: ebooks/03 - Da Escuta  Conduta B2B.pdf.",
+        citation: "B2B Nutris. Da Escuta à Conduta. E-book em PDF, páginas 5-8: sinais de atenção e encaminhamento, organização dos achados clínicos, critérios para priorização clínica e construção da conduta individualizada. Arquivo: ebooks/03 - Da Escuta à Conduta.pdf.",
       },
     ],
     version: "1",
@@ -242,7 +242,7 @@ const approvedArticles: ScientificArticle[] = [
     scientificReferences: [
       {
         title: "Suplementos, seções Probióticos e Prebióticos",
-        citation: "B2B Nutris. Suplementos, seções “Probióticos” e “Prebióticos”. E-book em PDF, páginas 23–26. Arquivo: ebooks/06 - SuplementaoB2Bnutris.pdf.",
+        citation: "B2B Nutris. Suplementos, seções “Probióticos” e “Prebióticos”. E-book em PDF, páginas 23–26. Arquivo: ebooks/06 - Guia de Suplementação Na Prática Clínica.pdf.",
       },
       {
         title: "Probiotics and prebiotics: WGO Global Guideline",

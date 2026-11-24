@@ -18,13 +18,16 @@ export default function HomePage() {
       <section className="section--hero home-section home-hero" aria-labelledby="hero-title">
         <div className="site-container home-hero__layout">
           <div className="home-hero__copy">
-            <span className="hero-eyebrow">E-books e guias para nutricionistas</span>
-            <h1 id="hero-title">
-              Conhecimento à mão.{" "}
-              <span className="home-hero__highlight home-hero__highlight--light-20">
-                Mais praticidade no seu dia a dia.
-              </span>
-            </h1>
+            <span className="hero-eyebrow">Soluções para Nutricionistas</span>
+              <h1 id="hero-title">
+                Você cuida de cada paciente.{" "}
+                <span
+                  className="home-hero__highlight home-hero__highlight--light-20"
+                  style={{ marginTop: "20px" }}
+                >
+                  Aqui, apoiamos seu próximo atendimento.
+                </span>
+              </h1>
             <p>
               Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
             </p>
