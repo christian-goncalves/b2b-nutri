@@ -53,6 +53,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="home-credibility" aria-label="Credibilidade da B2B Nutris">
+        <ul className="home-credibility__list">
+          <li>
+            <strong>Autoria profissional</strong>
+            <span>Bianca Gonçalves</span>
+          </li>
+          <li>
+            <strong>Base científica</strong>
+            <span>Referências nos materiais</span>
+          </li>
+          <li>
+            <strong>Aplicação clínica</strong>
+            <span>Guias e ferramentas</span>
+          </li>
+          <li>
+            <strong>Biblioteca digital</strong>
+            <span>Artigos organizados</span>
+          </li>
+        </ul>
+      </section>
+
       <section className="home-section section--featured home-library-selection" id="ebooks-em-destaque" aria-labelledby="featured-title">
         <div className="site-container">
           <SectionHeading
@@ -83,14 +104,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section section--contact" aria-labelledby="problem-title">
-        <div className="site-container">
-          <SectionHeading
-            id="problem-title"
-            eyebrow="Mais tempo para cuidar"
-            title="Você estudou para cuidar de pessoas, não para perder tempo procurando informações."
-            centered
-          />
+      <section className="home-section section--contact home-problem" aria-labelledby="problem-title">
+        <div className="site-container home-problem__layout">
+          <div className="home-problem__copy">
+            <span className="section-heading__eyebrow">Talvez você se reconheça</span>
+            <h2 className="home-problem__title" id="problem-title">
+              Você estudou para cuidar de pessoas,
+              <em>não para perder tempo procurando informações.</em>
+            </h2>
+            <p className="home-problem__intro">
+              Artigos, publicações, aulas e materiais se acumulam em lugares diferentes. Quando você precisa consultar uma informação, nem sempre lembra onde está — e acaba procurando de novo.
+            </p>
+            <ul className="home-problem__points">
+              <li>O conteúdo fica dividido entre publicações salvas, PDFs, grupos e anotações.</li>
+              <li>Na hora de consultar, você nem sempre lembra onde guardou a informação.</li>
+              <li>Para encontrar um detalhe, às vezes precisa rever materiais extensos.</li>
+              <li>Estratégias que estudou podem acabar esquecidas durante o atendimento.</li>
+            </ul>
+            <p className="home-problem__bridge">
+              Isso não significa que você estudou pouco. Com tanto conhecimento disperso, encontrar, lembrar e aplicar uma informação na hora certa pode ser difícil. A B2B Nutris organiza materiais e ferramentas de consulta para apoiar esses momentos.
+            </p>
+          </div>
+
+          <figure className="home-problem__visual" aria-labelledby="problem-visual-caption">
+            <span className="home-problem__paper home-problem__paper--article" aria-hidden="true">
+              <span>ARTIGOS SALVOS</span><i /><i /><i /><i />
+            </span>
+            <span className="home-problem__paper home-problem__paper--notes" aria-hidden="true">
+              <span>ANOTAÇÕES</span><i /><i /><i />
+            </span>
+            <div className="home-problem__cover home-problem__cover--back" aria-hidden="true">
+              <Image src="/images/books/04-guia-visual-das-vitaminas.png" alt="" width={800} height={1100} sizes="(max-width: 720px) 32vw, 16vw" />
+            </div>
+            <div className="home-problem__question">
+              <span>NA HORA DA CONSULTA</span>
+              <p>Onde encontrei aquela informação?</p>
+              <b aria-hidden="true">?</b>
+            </div>
+            <div className="home-problem__cover home-problem__cover--front">
+              <Image src="/images/books/03-da-escuta-a-conduta.png" alt="Capa de Da Escuta à Conduta, um material da biblioteca B2B Nutris." width={800} height={1100} sizes="(max-width: 720px) 42vw, 21vw" />
+            </div>
+            <figcaption id="problem-visual-caption">Materiais e anotações espalhados tornam a consulta mais difícil.</figcaption>
+          </figure>
         </div>
       </section>
 
