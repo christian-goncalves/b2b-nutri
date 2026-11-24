@@ -13,9 +13,18 @@ export function HomeHeroInteraction() {
     const trigger = triggerRef.current;
     if (!trigger) return;
 
+    const hideNear = Array.from(
+      document.querySelectorAll<HTMLElement>("#contato, .foundation-footer"),
+    );
+
     const updateStickyVisibility = () => {
       const rect = trigger.getBoundingClientRect();
-      setShowStickyLink(rect.bottom <= 0 || rect.top >= window.innerHeight);
+      const pastHero = window.innerWidth < 900 && rect.bottom < 0;
+      const nearPageEnd = hideNear.some((element) => {
+        const section = element.getBoundingClientRect();
+        return section.top < window.innerHeight * 0.88 && section.bottom > 0;
+      });
+      setShowStickyLink(pastHero && !nearPageEnd);
     };
 
     updateStickyVisibility();
@@ -76,9 +85,20 @@ export function HomeHeroInteraction() {
         </div>
       </dialog>
 
-      <div className={`home-sticky-cta${showStickyLink ? " home-sticky-cta--visible" : ""}`}>
-        <Link className="btn btn--primary home-hero__cta" href="#ebooks-em-destaque" tabIndex={showStickyLink ? 0 : -1} aria-hidden={!showStickyLink}>
-          Ver e-books em destaque
+      <div
+        className={`home-sticky-cta${showStickyLink ? " home-sticky-cta--visible" : ""}`}
+        aria-hidden={!showStickyLink}
+      >
+        <div className="home-sticky-cta__copy">
+          <strong>B2B Nutris</strong>
+          <span>a partir de R$ 19,90</span>
+        </div>
+        <Link
+          className="btn btn--primary home-hero__cta"
+          href="/ebooks"
+          tabIndex={showStickyLink ? 0 : -1}
+        >
+          Comprar e-book
         </Link>
       </div>
     </>

@@ -7,7 +7,7 @@ export function BookCard({ book, headingLevel = "h3" }: { book: HomeBook; headin
   const Heading = headingLevel;
   return (
     <article className="card book-card">
-      <Link className="book-card__cover" href={href} aria-label={`Conhecer ${book.title}`}>
+      <Link className="book-card__cover" href={href} aria-label={`Ver e-book: ${book.title}`}>
         <Image src={book.cover} alt={book.coverAlt} sizes="(max-width: 499px) 100vw, (max-width: 980px) 50vw, 33vw" />
       </Link>
       <div className="card__body">
@@ -16,7 +16,7 @@ export function BookCard({ book, headingLevel = "h3" }: { book: HomeBook; headin
         <p className="card__desc">{book.description}</p>
         <div className="card__action">
           <Link href={href} className="btn btn--primary">
-            CONHECER MATERIAL
+            Ver e-book
           </Link>
         </div>
       </div>
