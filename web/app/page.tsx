@@ -2,10 +2,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookCard } from "@/components/book-card";
 import { HomeHeroInteraction } from "@/components/home-hero-interaction";
+import { HomeLibraryArticles } from "@/components/home-library-articles";
 import { HomeSolutionSections } from "@/components/home-solution-sections";
 import { SectionHeading } from "@/components/section-heading";
 import { homeShowcaseBooks } from "@/data/home-books";
 import { createPageMetadata } from "@/lib/seo";
+
+type HomeEditorialHeadingProps = {
+  id: string;
+  eyebrow: string;
+  titleLead: string;
+  titleEmphasis: string;
+  description: string;
+};
+
+function HomeEditorialHeading({ id, eyebrow, titleLead, titleEmphasis, description }: HomeEditorialHeadingProps) {
+  return (
+    <header className="home-solution__heading home-editorial-heading">
+      <p className="home-solution__eyebrow">{eyebrow}</p>
+      <h2 className="home-solution__title" id={id}>
+        <span>{titleLead}</span>{" "}
+        <em>{titleEmphasis}</em>
+      </h2>
+      <p className="home-solution__intro">{description}</p>
+    </header>
+  );
+}
 
 export const metadata = createPageMetadata({
   title: "Materiais de nutrição para prática clínica",
@@ -146,7 +168,7 @@ export default function HomePage() {
             </div>
             <div className="home-problem__question">
               <span>NA HORA DA CONSULTA</span>
-              <p>Onde anotei? Não encontro</p>
+              <p>Onde anotei? Não encontro!</p>
               <b aria-hidden="true">?</b>
             </div>
             <div className="home-problem__cover home-problem__cover--front">
@@ -161,11 +183,12 @@ export default function HomePage() {
 
       <section className="home-section section--featured home-library-selection" id="ebooks-em-destaque" aria-labelledby="featured-title">
         <div className="site-container">
-          <SectionHeading
+          <HomeEditorialHeading
             id="featured-title"
             eyebrow="Seleção da biblioteca"
-            title="E-books em destaque"
-            description="Materiais de referência para apoiar diferentes momentos da prática nutricional."
+            titleLead="E-books em"
+            titleEmphasis="destaque"
+            description="Explore mapas para o raciocínio clínico, estratégias para a consulta e fichas de vitaminas."
           />
           <div className="book-grid">
             {homeShowcaseBooks.map((book) => <BookCard key={book.id} book={book} />)}
@@ -176,21 +199,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section section--catalog" aria-labelledby="library-title">
-        <div className="site-container">
-          <SectionHeading
-            id="library-title"
-            eyebrow="Biblioteca B2B Nutris"
-            title="Conteúdos para continuar aprendendo"
-            description="Explore os artigos científicos aprovados e os temas disponíveis na biblioteca."
-          />
-          <div className="home-section__action">
-            <Link href="/biblioteca" className="btn btn--primary">EXPLORAR A BIBLIOTECA</Link>
-          </div>
-        </div>
-      </section>
+      <HomeLibraryArticles />
 
-      <section className="home-section section--about" id="sobre" aria-labelledby="about-title">
+      <section className="home-section section--about home-about-author" id="sobre" aria-labelledby="about-title">
         <div className="site-container">
           <div className="about-layout">
             <div className="about-photo">
@@ -214,10 +225,11 @@ export default function HomePage() {
 
       <section className="home-section section--featured home-faq" aria-labelledby="faq-title">
         <div className="site-container">
-          <SectionHeading
+          <HomeEditorialHeading
             id="faq-title"
             eyebrow="Dúvidas frequentes"
-            title="Perguntas frequentes"
+            titleLead="Perguntas"
+            titleEmphasis="frequentes"
             description="Informações sobre os materiais e sobre o fluxo planejado do guia."
           />
           <div className="home-faq__list">
@@ -247,15 +259,16 @@ export default function HomePage() {
 
       <section className="home-section section--contact" id="contato" aria-labelledby="contact-title">
         <div className="site-container">
-          <SectionHeading
+          <HomeEditorialHeading
             id="contact-title"
             eyebrow="Canais de contato"
-            title="Fale com a B2B Nutris"
+            titleLead="Fale com a"
+            titleEmphasis="B2B Nutris"
             description="Nossos canais de WhatsApp e Instagram estarão disponíveis em breve."
           />
-          <div className="book-grid" aria-label="Canais de contato em breve">
-            <article className="card"><div className="card__body"><h3 className="card__title">WhatsApp</h3><p className="card__desc">Em breve</p></div></article>
-            <article className="card"><div className="card__body"><h3 className="card__title">Instagram</h3><p className="card__desc">Em breve</p></div></article>
+          <div className="book-grid home-contact__grid" aria-label="Canais de contato em breve">
+            <article className="card home-contact__card"><div className="card__body"><h3 className="card__title">WhatsApp</h3><p className="card__desc">Em breve</p></div></article>
+            <article className="card home-contact__card"><div className="card__body"><h3 className="card__title">Instagram</h3><p className="card__desc">Em breve</p></div></article>
           </div>
         </div>
       </section>

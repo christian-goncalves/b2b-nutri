@@ -56,9 +56,7 @@ const materials: MaterialSlide[] = [
 export function HomeSolutionMaterial() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [pointerOnControls, setPointerOnControls] = useState(false);
   const [arrowHasFocus, setArrowHasFocus] = useState(false);
-  const material = materials[activeIndex];
 
   useEffect(() => {
     const motionPreference = window.matchMedia(
@@ -75,14 +73,14 @@ export function HomeSolutionMaterial() {
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion || pointerOnControls || arrowHasFocus) return;
+    if (prefersReducedMotion || arrowHasFocus) return;
 
     const timeoutId = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % materials.length);
     }, 5000);
 
     return () => window.clearTimeout(timeoutId);
-  }, [activeIndex, arrowHasFocus, pointerOnControls, prefersReducedMotion]);
+  }, [activeIndex, arrowHasFocus, prefersReducedMotion]);
 
   const moveBy = (offset: number) => {
     setActiveIndex(
@@ -98,42 +96,62 @@ export function HomeSolutionMaterial() {
       <div className="site-container home-solution-material__layout">
         <div className="home-solution-material__copy">
           <p className="home-solution__eyebrow">Fichas para consulta</p>
-          <h2
-            className="home-solution__title"
-            id="home-solution-material-title"
-          >
-            <span>{material.titleLead}</span>{" "}
-            <em>{material.titleEmphasis}</em>
-          </h2>
-          <p className="home-solution__intro">
-            {material.descriptionLead}
-            <em>{material.descriptionEmphasis}</em>
-            {material.descriptionTail}
-          </p>
-          <p className="home-solution-material__terms">
-            {material.subtitle.map((term, index) => (
-              <Fragment key={term}>
-                {index > 0 && (
-                  <>
-                    {" "}
-                    <span aria-hidden="true">·</span>{" "}
-                  </>
-                )}
-                {term}
-              </Fragment>
+          <div className="home-solution-material__copy-slides">
+            {materials.map((material, index) => (
+              <div
+                className={`home-solution-material__copy-slide${
+                  index === activeIndex ? " is-active" : ""
+                }`}
+                aria-hidden={index !== activeIndex}
+                key={material.image}
+              >
+                <h2
+                  className="home-solution__title"
+                  id={index === activeIndex ? "home-solution-material-title" : undefined}
+                >
+                  <span>{material.titleLead}</span>{" "}
+                  <em>{material.titleEmphasis}</em>
+                </h2>
+                <p className="home-solution__intro">
+                  {material.descriptionLead}
+                  <em>{material.descriptionEmphasis}</em>
+                  {material.descriptionTail}
+                </p>
+                <p className="home-solution-material__terms">
+                  {material.subtitle.map((term, termIndex) => (
+                    <Fragment key={term}>
+                      {termIndex > 0 && (
+                        <>
+                          {" "}
+                          <span aria-hidden="true">·</span>{" "}
+                        </>
+                      )}
+                      {term}
+                    </Fragment>
+                  ))}
+                </p>
+              </div>
             ))}
-          </p>
+          </div>
         </div>
 
         <div className="home-solution-material__visual">
           <figure className="home-solution-device-frame home-solution-material__device">
             <div className="home-solution-material__screen">
-              <Image
-                src={material.image}
-                alt={material.imageAlt}
-                fill
-                sizes="(max-width: 899px) 84vw, 480px"
-              />
+              {materials.map((material, index) => (
+                <Image
+                  key={material.image}
+                  src={material.image}
+                  alt={material.imageAlt}
+                  aria-hidden={index !== activeIndex}
+                  className={`home-solution-material__screen-image${
+                    index === activeIndex ? " is-active" : ""
+                  }`}
+                  fill
+                  sizes="(max-width: 899px) 84vw, 480px"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              ))}
               <span
                 className="home-solution-material__island"
                 aria-hidden="true"
@@ -145,24 +163,25 @@ export function HomeSolutionMaterial() {
             className="home-solution-material__controls"
             role="group"
             aria-label="Navegação das fichas para consulta"
-            onPointerEnter={() => setPointerOnControls(true)}
-            onPointerLeave={() => setPointerOnControls(false)}
-            onFocusCapture={() => setArrowHasFocus(true)}
+            onFocusCapture={(event) =>
+              setArrowHasFocus(event.target.matches(":focus-visible"))
+            }
             onBlurCapture={(event) => {
               const nextTarget = event.relatedTarget;
-              setArrowHasFocus(
-                nextTarget instanceof Node &&
-                  event.currentTarget.contains(nextTarget),
-              );
+              if (!(nextTarget instanceof Node && event.currentTarget.contains(nextTarget))) {
+                setArrowHasFocus(false);
+              }
             }}
+            onPointerDownCapture={() => setArrowHasFocus(false)}
           >
             <button
               type="button"
               aria-label="Mostrar material anterior"
               onClick={() => moveBy(-1)}
             >
-              <span aria-hidden="true">←</span>
-              <span>Anterior</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M19 12H5m7-7-7 7 7 7" />
+              </svg>
             </button>
             <span className="home-solution-material__position" aria-hidden="true">
               {activeIndex + 1} de {materials.length}
@@ -172,8 +191,9 @@ export function HomeSolutionMaterial() {
               aria-label="Mostrar próximo material"
               onClick={() => moveBy(1)}
             >
-              <span>Próxima</span>
-              <span aria-hidden="true">→</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
             </button>
           </div>
         </div>
