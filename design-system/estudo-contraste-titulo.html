@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Estudo de contraste do título | B2B Nutris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-brand-primary: #641D24;
+      --color-brand-cream: #FAF3EA;
+      --color-brand-olive-text: #6A6D55;
+      --color-action-primary: #F2C14E;
+      --color-action-text: #641D24;
+      --color-text: #665659;
+      --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+      --font-display: "Playfair Display", Georgia, serif;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { background: #fff; }
+
+    body {
+      width: min(100%, 672px);
+      margin: 0 auto;
+      color: var(--color-text);
+      font-family: var(--font-body);
+    }
+
+    .comparison {
+      --title-color: #56191F; /* 1 */
+      margin: 16px 8px 24px;
+      overflow: hidden;
+      border: 1px solid #d8d8d8;
+      border-radius: 9px;
+      background:
+        linear-gradient(112deg, #fffaf7 0%, #fae9eb 100%);
+    }
+
+    .comparison:nth-of-type(2) { --title-color: #48151A; /* 2 */ }
+    .comparison:nth-of-type(3) { --title-color: #391115; /* 3 */ }
+
+    .site-header {
+      display: flex;
+      min-height: 70px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      background: #79001d;
+      color: #fff;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .menu-icon {
+      display: grid;
+      width: 32px;
+      gap: 6px;
+    }
+
+    .menu-icon span {
+      display: block;
+      height: 3px;
+      border-radius: 3px;
+      background: #fff;
+    }
+
+    .hero {
+      padding: 48px 16px 0;
+      background:
+        linear-gradient(180deg, transparent 70%, #fae9eb 100%),
+        linear-gradient(112deg, #fffaf7 0%, #fae9eb 100%);
+    }
+
+    .hero__eyebrow {
+      margin: 0 0 20px;
+      color: #45492b;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .hero__title {
+      max-width: 18ch;
+      margin: 0 auto;
+      color: var(--title-color);
+      font-family: var(--font-display);
+      font-size: clamp(38px, 9.4vw, 60px);
+      font-weight: 500;
+      letter-spacing: -.012em;
+      line-height: 1.08;
+    }
+
+    .hero__highlight {
+      display: block;
+      margin-top: 20px;
+      color: var(--color-brand-olive-text);
+      font-style: italic;
+      font-weight: inherit;
+      letter-spacing: inherit;
+    }
+
+    .hero__description {
+      max-width: 54ch;
+      margin: 16px auto 0;
+      color: var(--color-text);
+      font-size: 18px;
+      line-height: 1.62;
+      text-align: center;
+    }
+
+    .hero__actions { margin-top: 32px; }
+
+    .hero__button {
+      display: flex;
+      width: 100%;
+      min-height: 60px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--color-action-primary);
+      box-shadow: 0 12px 22px rgb(100 29 36 / 20%);
+      color: var(--color-action-text);
+      font: 700 16px/1.25 var(--font-body);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .hero__cta-description {
+      margin: 12px 0 0;
+      color: var(--color-text);
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      .hero { padding: 44px 16px 0; }
+      .hero__description { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="Comparação de três tons para o título da B2B Nutris">
+    <section class="comparison" aria-label="Primeira opção de cor">
+      <header class="site-header">
+        <p class="brand">B2B NUTRIS</p>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </header>
+      <div class="hero">
+        <p class="hero__eyebrow">Soluções para Nutricionistas</p>
+        <h1 class="hero__title">
+          Você cuida de cada paciente.
+          <span class="hero__highlight">Aqui, apoiamos seu próximo atendimento.</span>
+        </h1>
+        <p class="hero__description">
+          Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
+        </p>
+        <div class="hero__actions">
+          <div class="hero__button">Quero receber meu e-book</div>
+          <p class="hero__cta-description">Receba gratuitamente o e-book <strong>Antes da Consulta</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison" aria-label="Segunda opção de cor">
+      <header class="site-header">
+        <p class="brand">B2B NUTRIS</p>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </header>
+      <div class="hero">
+        <p class="hero__eyebrow">Soluções para Nutricionistas</p>
+        <h1 class="hero__title">
+          Você cuida de cada paciente.
+          <span class="hero__highlight">Aqui, apoiamos seu próximo atendimento.</span>
+        </h1>
+        <p class="hero__description">
+          Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
+        </p>
+        <div class="hero__actions">
+          <div class="hero__button">Quero receber meu e-book</div>
+          <p class="hero__cta-description">Receba gratuitamente o e-book <strong>Antes da Consulta</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison" aria-label="Terceira opção de cor">
+      <header class="site-header">
+        <p class="brand">B2B NUTRIS</p>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </header>
+      <div class="hero">
+        <p class="hero__eyebrow">Soluções para Nutricionistas</p>
+        <h1 class="hero__title">
+          Você cuida de cada paciente.
+          <span class="hero__highlight">Aqui, apoiamos seu próximo atendimento.</span>
+        </h1>
+        <p class="hero__description">
+          Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
+        </p>
+        <div class="hero__actions">
+          <div class="hero__button">Quero receber meu e-book</div>
+          <p class="hero__cta-description">Receba gratuitamente o e-book <strong>Antes da Consulta</strong>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

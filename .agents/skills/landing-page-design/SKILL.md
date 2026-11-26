@@ -59,6 +59,10 @@ Usar esta ordem como **briefing comercial**, não como licença para reconstruir
 10. **Contato:** preservar o fragmento `/#contato`; exibir **“WhatsApp: em breve”** e **“Instagram: em breve”** sem links ativos.
 11. **CTA final:** reforçar o convite para receber gratuitamente o guia.
 
+### Questionario aos nutricionistas
+
+- **Questionario:** Criar um qustionario aos nutricionistas que seja estimulatnes de ser respondido, quero identificar suas dores. "E se tivesse uma varinha magica para eliminar um problema do dia a dia, qual seria (pergunta aberta)"
+
 O fluxo de três passos do guia (*informar e-mail → confirmar endereço → receber PDF*) deve ser explicado perto da captação, **não obrigatoriamente em uma seção grande**. Remover da home repetições de produtos e a seção de “próximo lançamento” sem anúncio quando a refatoração estiver autorizada. Formulários de contato indisponíveis não devem parecer ativos.
 
 ### Textos comerciais já aprovados

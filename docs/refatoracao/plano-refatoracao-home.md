@@ -55,7 +55,7 @@ Manter a ordem comercial aprovada pela skill, ajustando a composição existente
 | 1 | Hero e oferta do guia | Usar o texto comercial aprovado na skill. Apresentar o Antes da Consulta como principal oferta e incluir a interface de captação quando a etapa própria estiver aprovada. Manter “Explorar e-books” como ação secundária para `/ebooks`. Não declarar envio ou confirmação concluídos sem resposta real da integração. |
 | 2 | Credibilidade compacta | Informar autoria e organização editorial somente com fatos confirmados. Não adicionar métricas, selos, parcerias ou afirmações sem fonte. |
 | 3 | Problema | Usar a mensagem aprovada: “Você estudou para cuidar de pessoas, não para perder tempo procurando informações.” |
-| 4 | Benefícios | Usar os três benefícios aprovados: “Encontre o que precisa, com mais facilidade”; “Leve o conhecimento para a prática”; “Construa sua própria biblioteca de referência”. |
+| 4 | Benefícios | Usar os três benefícios aprovados: “Encontre o que precisa, com mais facilidade”; “Leve o conhecimento para a prática”; “Construa sua própria biblioteca de referência”. A especificação proposta para as três sessões está em [CP-HOME-04: solução em três sessões](especificacao-cp-home-04-solucao.md). |
 | 5 | E-books em destaque | Exibir os três títulos aprovados em `BookCard`. Cada card mantém o link individual. Incluir um botão independente “Explorar todos os e-books” para `/ebooks`. |
 | 6 | Biblioteca | Manter convite breve para `/biblioteca`. Incluir links a artigos somente se publicados ou aprovados para a rota pública. |
 | 7 | Sobre Bianca | Reaproveitar o layout existente. Escrever síntese profissional a partir do currículo e adaptar a fotografia real fornecida ao espaço atual, sem alterar a identidade visual. |

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookCard } from "@/components/book-card";
 import { HomeHeroInteraction } from "@/components/home-hero-interaction";
+import { HomeSolutionSections } from "@/components/home-solution-sections";
 import { SectionHeading } from "@/components/section-heading";
 import { homeShowcaseBooks } from "@/data/home-books";
 import { createPageMetadata } from "@/lib/seo";
@@ -19,15 +20,15 @@ export default function HomePage() {
         <div className="site-container home-hero__layout">
           <div className="home-hero__copy">
             <span className="hero-eyebrow">Soluções para Nutricionistas</span>
-              <h1 id="hero-title">
-                Você cuida de cada paciente.{" "}
-                <span
-                  className="home-hero__highlight home-hero__highlight--light-20"
-                  style={{ marginTop: "20px" }}
-                >
-                  Aqui, apoiamos seu próximo atendimento.
-                </span>
-              </h1>
+            <h1 id="hero-title">
+              Você cuida de cada paciente.{" "}
+              <span
+                className="home-hero__highlight home-hero__highlight--light-20"
+                style={{ marginTop: "20px" }}
+              >
+                Aqui, apoiamos seu próximo atendimento.
+              </span>
+            </h1>
             <p>
               Chega de <strong>perder tempo</strong> procurando informações entre arquivos e pesquisas intermináveis. A B2B Nutris reúne <strong>guias e materiais práticos</strong> para você ganhar agilidade, organizar seu conhecimento e focar no que realmente importa: <strong>seus atendimentos</strong>.
             </p>
@@ -74,55 +75,62 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="home-section section--featured home-library-selection" id="ebooks-em-destaque" aria-labelledby="featured-title">
-        <div className="site-container">
-          <SectionHeading
-            id="featured-title"
-            eyebrow="Seleção da biblioteca"
-            title="E-books em destaque"
-            description="Materiais de referência para apoiar diferentes momentos da prática nutricional."
-            centered
-          />
-          <div className="book-grid">
-            {homeShowcaseBooks.map((book) => <BookCard key={book.id} book={book} />)}
-          </div>
-          <div className="home-section__action">
-            <Link href="/ebooks" className="btn btn--primary">Explorar todos os e-books</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-section section--featured" aria-labelledby="credibility-title">
-        <div className="site-container">
-          <SectionHeading
-            id="credibility-title"
-            eyebrow="B2B Nutris"
-            title="Conhecimento organizado para a prática nutricional"
-            description="Materiais digitais desenvolvidos pela B2B Nutris com a experiência profissional da nutricionista Bianca Gonçalves."
-            centered
-          />
-        </div>
-      </section>
-
       <section className="home-section section--contact home-problem" aria-labelledby="problem-title">
         <div className="site-container home-problem__layout">
           <div className="home-problem__copy">
             <span className="section-heading__eyebrow">Talvez você se reconheça</span>
             <h2 className="home-problem__title" id="problem-title">
               Você estudou para cuidar de pessoas,
-              <em>não para perder tempo procurando informações.</em>
+              <em style={{ marginTop: "10px" }}>não para perder tempo procurando informações.</em>
             </h2>
             <p className="home-problem__intro">
               Artigos, publicações, aulas e materiais se acumulam em lugares diferentes. Quando você precisa consultar uma informação, nem sempre lembra onde está — e acaba procurando de novo.
             </p>
             <ul className="home-problem__points">
-              <li>O conteúdo fica dividido entre publicações salvas, PDFs, grupos e anotações.</li>
-              <li>Na hora de consultar, você nem sempre lembra onde guardou a informação.</li>
-              <li>Para encontrar um detalhe, às vezes precisa rever materiais extensos.</li>
-              <li>Estratégias que estudou podem acabar esquecidas durante o atendimento.</li>
+              <li>
+                <svg className="home-problem__point-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect className="home-problem__point-icon-back" x="8.5" y="2.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M12 7h5M12 10h5" />
+                  <rect className="home-problem__point-icon-front" x="3.5" y="6.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M7 11h5M7 14h5M7 17h3" />
+                </svg>
+                <span>O conteúdo fica dividido entre publicações salvas, PDFs, grupos e anotações.</span>
+              </li>
+              <li>
+                <svg className="home-problem__point-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect className="home-problem__point-icon-back" x="8.5" y="2.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M12 7h5M12 10h5" />
+                  <rect className="home-problem__point-icon-front" x="3.5" y="6.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M7 11h5M7 14h5M7 17h3" />
+                </svg>
+                <span>Na hora de consultar, você nem sempre lembra onde guardou a informação.</span>
+              </li>
+              <li>
+                <svg className="home-problem__point-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect className="home-problem__point-icon-back" x="8.5" y="2.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M12 7h5M12 10h5" />
+                  <rect className="home-problem__point-icon-front" x="3.5" y="6.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M7 11h5M7 14h5M7 17h3" />
+                </svg>
+                <span>Para encontrar um detalhe, às vezes precisa rever materiais extensos.</span>
+              </li>
+              <li>
+                <svg className="home-problem__point-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect className="home-problem__point-icon-back" x="8.5" y="2.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M12 7h5M12 10h5" />
+                  <rect className="home-problem__point-icon-front" x="3.5" y="6.5" width="12" height="15" rx="1.5" />
+                  <path className="home-problem__point-icon-lines" d="M7 11h5M7 14h5M7 17h3" />
+                </svg>
+                <span>Estratégias que estudou podem acabar esquecidas durante o atendimento.</span>
+              </li>
             </ul>
             <p className="home-problem__bridge">
-              Isso não significa que você estudou pouco. Com tanto conhecimento disperso, encontrar, lembrar e aplicar uma informação na hora certa pode ser difícil. A B2B Nutris organiza materiais e ferramentas de consulta para apoiar esses momentos.
+              <span>
+                Não significa que você estudou pouco. Com tanto conhecimento disperso,
+              </span>
+              <em style={{ marginTop: "10px" }}>
+                Encontrar a informação certa na hora da consulta é que pode ser difícil.
+              </em>
             </p>
           </div>
 
@@ -138,7 +146,7 @@ export default function HomePage() {
             </div>
             <div className="home-problem__question">
               <span>NA HORA DA CONSULTA</span>
-              <p>Onde encontrei aquela informação?</p>
+              <p>Onde anotei? Não encontro</p>
               <b aria-hidden="true">?</b>
             </div>
             <div className="home-problem__cover home-problem__cover--front">
@@ -149,18 +157,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section section--featured" aria-labelledby="benefits-title">
+      <HomeSolutionSections />
+
+      <section className="home-section section--featured home-library-selection" id="ebooks-em-destaque" aria-labelledby="featured-title">
         <div className="site-container">
           <SectionHeading
-            id="benefits-title"
-            eyebrow="Uma biblioteca para sua rotina"
-            title="Encontre apoio para estudar, consultar e organizar"
-            centered
+            id="featured-title"
+            eyebrow="Seleção da biblioteca"
+            title="E-books em destaque"
+            description="Materiais de referência para apoiar diferentes momentos da prática nutricional."
           />
-          <div className="book-grid" aria-label="Benefícios dos materiais B2B Nutris">
-            <article className="card"><div className="card__body"><h3 className="card__title">Encontre o que precisa, com mais facilidade</h3></div></article>
-            <article className="card"><div className="card__body"><h3 className="card__title">Leve o conhecimento para a prática</h3></div></article>
-            <article className="card"><div className="card__body"><h3 className="card__title">Construa sua própria biblioteca de referência</h3></div></article>
+          <div className="book-grid">
+            {homeShowcaseBooks.map((book) => <BookCard key={book.id} book={book} />)}
+          </div>
+          <div className="home-section__action">
+            <Link href="/ebooks" className="btn btn--primary">Explorar todos os e-books</Link>
           </div>
         </div>
       </section>
@@ -172,7 +183,6 @@ export default function HomePage() {
             eyebrow="Biblioteca B2B Nutris"
             title="Conteúdos para continuar aprendendo"
             description="Explore os artigos científicos aprovados e os temas disponíveis na biblioteca."
-            centered
           />
           <div className="home-section__action">
             <Link href="/biblioteca" className="btn btn--primary">EXPLORAR A BIBLIOTECA</Link>
@@ -209,7 +219,6 @@ export default function HomePage() {
             eyebrow="Dúvidas frequentes"
             title="Perguntas frequentes"
             description="Informações sobre os materiais e sobre o fluxo planejado do guia."
-            centered
           />
           <div className="home-faq__list">
             <details className="home-faq__item">
@@ -243,7 +252,6 @@ export default function HomePage() {
             eyebrow="Canais de contato"
             title="Fale com a B2B Nutris"
             description="Nossos canais de WhatsApp e Instagram estarão disponíveis em breve."
-            centered
           />
           <div className="book-grid" aria-label="Canais de contato em breve">
             <article className="card"><div className="card__body"><h3 className="card__title">WhatsApp</h3><p className="card__desc">Em breve</p></div></article>
