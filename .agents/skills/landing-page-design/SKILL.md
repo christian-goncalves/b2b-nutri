@@ -54,6 +54,7 @@ Usar esta ordem como **briefing comercial**, não como licença para reconstruir
 5. **Três e-books em destaque:** seleção aprovada: **Da Escuta à Conduta**, **O Olhar Comportamental na Consulta Nutricional** e **Guia Visual das Vitaminas**. Manter cada `BookCard` apontando à sua página individual e incluir botão separado **“Explorar todos os e-books”** para `/ebooks`. Não replicar os seis produtos nem alterar flags globais como atalho.
 6. **Biblioteca:** convite breve e links apenas para artigos publicados ou aprovados.
 7. **Sobre Bianca:** preservar a estrutura existente e usar o texto factual aprovado abaixo e a fotografia real fornecida, sem inventar credenciais nem substituir a pessoa por imagem fictícia.
+8. **A historia por trás da B2B:** `/home/cg/Documentos/01-DEV/PROJETOS/b2b-nutri/docs/bianca/historia-por-tras.png`
 8. **Depoimentos:** **não publicar** exemplos demonstrativos; exibir a seção somente com depoimentos autênticos e autorizados.
 9. **Perguntas frequentes:** respostas objetivas e verificadas sobre público, formato digital, utilização, compra e guia gratuito; não prometer condições não implementadas.
 10. **Contato:** preservar o fragmento `/#contato`; exibir **“WhatsApp: em breve”** e **“Instagram: em breve”** sem links ativos.

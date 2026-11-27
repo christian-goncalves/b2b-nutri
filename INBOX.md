@@ -29,8 +29,10 @@ Checklist de configuração da Vercel.
 
 
 ## Pontos que merecem atenção
-Posicionamento: a apresentação da marca ainda é bastante genérica. A frase "Materiais digitais para a prática nutricional" identifica o segmento, mas não comunica claramente o diferencial da B2B Nutris.
 
-Autoridade profissional: a seção "Sobre a autora" ainda informa que a biografia será incluída posteriormente. Para conteúdos relacionados à saúde, identificar quem produz e revisa o material, com suas qualificações, é especialmente importante.
+Categorias
 
-A página inicial pode funcionar como uma vitrine comercial, apresentando a marca, o material gratuito e os seis e-books. Já um anúncio específico pode levar a uma página dedicada ao Antes da Consulta, com menos distrações e foco na conversão. Isso preserva tudo o que estamos construindo e permite testar campanhas sem ficar modificando a home.
+Subcategorias
+
+
+##

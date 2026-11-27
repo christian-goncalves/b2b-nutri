@@ -19,7 +19,7 @@ export function HomeHeroInteraction() {
 
     const updateStickyVisibility = () => {
       const rect = trigger.getBoundingClientRect();
-      const pastHero = window.innerWidth < 900 && rect.bottom < 0;
+      const pastHero = rect.bottom < 0;
       const nearPageEnd = hideNear.some((element) => {
         const section = element.getBoundingClientRect();
         return section.top < window.innerHeight * 0.88 && section.bottom > 0;
@@ -56,7 +56,7 @@ export function HomeHeroInteraction() {
         aria-controls="guide-capture-dialog"
         onClick={openDialog}
       >
-        Quero receber meu e-book
+        Quero meu e-book
       </button>
       <p className="home-hero__cta-description">Receba gratuitamente o e-book <strong>Antes da Consulta</strong>.</p>
 

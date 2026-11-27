@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookCard } from "@/components/book-card";
 import { HomeHeroInteraction } from "@/components/home-hero-interaction";
+import { HomeHistorySection } from "@/components/home-history-section";
 import { HomeLibraryArticles } from "@/components/home-library-articles";
 import { HomeSolutionSections } from "@/components/home-solution-sections";
 import { SectionHeading } from "@/components/section-heading";
@@ -48,7 +49,7 @@ export default function HomePage() {
                 className="home-hero__highlight home-hero__highlight--light-20"
                 style={{ marginTop: "20px" }}
               >
-                Aqui, apoiamos seu próximo atendimento.
+                Aqui, cuidamos do seu conhecimento.
               </span>
             </h1>
             <p>
@@ -60,12 +61,12 @@ export default function HomePage() {
           </div>
           <figure className="home-hero__visual">
             <div className="home-hero__page home-hero__page--back" aria-hidden="true">
-              <Image src="/images/home-guide-poster-back.png" alt="" width={1055} height={1491} sizes="(max-width: 767px) 72vw, 29vw" />
+              <Image src="/images/home-guide-poster-back-consultorio.png" alt="" width={1055} height={1491} sizes="(max-width: 767px) 72vw, 29vw" />
             </div>
             <div className="home-hero__page home-hero__page--front">
               <Image
-                src="/images/home-guide-poster-front.png"
-                alt="Arte temporária do guia gratuito Antes da Consulta para nutricionistas, com a capa e telas do material."
+                src="/images/home-guide-poster-front-antes-da-consulta.png"
+                alt="Capa do e-book Antes da Consulta em um tablet, ao lado de anotações sobre motivo, rotina e expectativas para a consulta."
                 width={1055}
                 height={1491}
                 sizes="(max-width: 767px) 82vw, 34vw"
@@ -215,22 +216,28 @@ export default function HomePage() {
               />
             </div>
             <div className="about-copy">
-              <span className="section-heading__eyebrow">Conheça a autora</span>
-              <h2 id="about-title">Conheça Bianca Gonçalves</h2>
-              <p>Bianca Gonçalves é nutricionista clínica (CRN-3 89451/P), formada pela Universidade Paulista (UNIP) e pós-graduada em Neurociência e Comportamento Alimentar pela PUC Campinas. Possui formação em Mindful Eating e atua em atendimentos particulares on-line, considerando a alimentação, o comportamento, o sono e as emoções em sua prática.</p>
+              <HomeEditorialHeading
+                id="about-title"
+                eyebrow="Conheça a autora"
+                titleLead="Conheça"
+                titleEmphasis="Bianca Gonçalves"
+                description="Bianca Gonçalves é nutricionista clínica (CRN-3 89451/P), formada pela Universidade Paulista (UNIP) e pós-graduada em Neurociência e Comportamento Alimentar pela PUC Campinas. Possui formação em Mindful Eating e atua em atendimentos particulares on-line, considerando a alimentação, o comportamento, o sono e as emoções em sua prática."
+              />
             </div>
           </div>
         </div>
       </section>
+
+      <HomeHistorySection />
 
       <section className="home-section section--featured home-faq" aria-labelledby="faq-title">
         <div className="site-container">
           <HomeEditorialHeading
             id="faq-title"
             eyebrow="Dúvidas frequentes"
-            titleLead="Perguntas"
-            titleEmphasis="frequentes"
-            description="Informações sobre os materiais e sobre o fluxo planejado do guia."
+            titleLead="O que você deve estar"
+            titleEmphasis="se perguntando"
+            description=""
           />
           <div className="home-faq__list">
             <details className="home-faq__item">
